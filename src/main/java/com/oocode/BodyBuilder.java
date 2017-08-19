@@ -4,24 +4,24 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class BodyBuilder {
-    public static RequestBody bodyBuilderForSmallOrders(int w, int h, int n, int width, int height) {
+    public static RequestBody bodyBuilderForSmallOrders(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance) {
         return new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("account", "Test Account")
-                .addFormDataPart("quantity", Integer.toString(n))
-                .addFormDataPart("width", Integer.toString(w - width))
-                .addFormDataPart("height", Integer.toString(h - height))
+                .addFormDataPart("quantity", Integer.toString(numberOfWindow))
+                .addFormDataPart("width", Integer.toString(widthOfWindow - widthThicknessAllowance))
+                .addFormDataPart("height", Integer.toString(heightOfWindow - heightThicknessAllowance))
                 .addFormDataPart("type", "plain")
                 .build();
     }
 
-    public static RequestBody bodyBuilderForLargeOrders(int w, int h, int n, int width, int height) {
+    public static RequestBody bodyBuilderForLargeOrders(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance) {
         return new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("account", "Test Account")
-                .addFormDataPart("quantity", Integer.toString(n))
-                .addFormDataPart("width", Integer.toString(w - width))
-                .addFormDataPart("height", Integer.toString(h - height))
+                .addFormDataPart("quantity", Integer.toString(numberOfWindow))
+                .addFormDataPart("width", Integer.toString(widthOfWindow - widthThicknessAllowance))
+                .addFormDataPart("height", Integer.toString(heightOfWindow - heightThicknessAllowance))
                 .addFormDataPart("type", "toughened")
                 .build();
     }
