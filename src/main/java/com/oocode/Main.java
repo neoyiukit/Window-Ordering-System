@@ -13,8 +13,8 @@ public class Main {
         // the thickness of the frame depends on the model of window
         int width = width(r, true); int height = width(r, false);
 
-        RequestBody requestBody = BodyBuilder.bodyBuilder(w, h, n, width, height);
-        if (h > 120) requestBody = BodyBuilder.bodyBuilder2(w, h, n, width, height);
+        RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(w, h, n, width, height);
+        if (h > 120) requestBody = BodyBuilder.bodyBuilderForLargeOrders(w, h, n, width, height);
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame

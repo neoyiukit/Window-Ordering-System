@@ -4,7 +4,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 public class BodyBuilder {
-    public static RequestBody bodyBuilder(int w, int h, int n, int width, int height) {
+    public static RequestBody bodyBuilderForSmallOrders(int w, int h, int n, int width, int height) {
         return new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("account", "Test Account")
@@ -15,7 +15,7 @@ public class BodyBuilder {
                 .build();
     }
 
-    public static RequestBody bodyBuilder2(int w, int h, int n, int width, int height) {
+    public static RequestBody bodyBuilderForLargeOrders(int w, int h, int n, int width, int height) {
         return new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("account", "Test Account")
