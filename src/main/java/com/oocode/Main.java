@@ -4,17 +4,20 @@ import okhttp3.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        int n = Integer.parseInt(args[2]);  // the number of windows of this size
         int w = Integer.parseInt(args[0]);  // the width of the window
         int h = Integer.parseInt(args[1]);  // the height of the window
+        int n = Integer.parseInt(args[2]);  // the number of windows of this size
         String r = args[3];                 // the model name of these windows
         OkHttpClient client = new OkHttpClient();
 
         // the thickness of the frame depends on the model of window
-        int width = width(r, true); int height = width(r, false);
+        int width = width(r, true);
+        int height = width(r, false);
 
         RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(w, h, n, width, height);
-        if (h > 120) requestBody = BodyBuilder.bodyBuilderForLargeOrders(w, h, n, width, height);
+        if (h > 120){
+            requestBody = BodyBuilder.bodyBuilderForLargeOrders(w, h, n, width, height);
+        }
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame
@@ -47,8 +50,7 @@ public class Main {
         }
     }
 
-    public static
-    int width(String r, boolean b) {
+    public static int width(String r, boolean b) {
         if (!b) return h(r, b);
         if (r.equals("Churchill")) {
             return 4;
@@ -63,7 +65,9 @@ public class Main {
     }
 
     public static int h(String r, boolean b) {
-        if (r.equals("Churchill")) return 3;
+        if (r.equals("Churchill")) {
+            return 3;
+        }
         if (r.equals("Victoria")) {
             return 3;
         }
