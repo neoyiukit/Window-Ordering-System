@@ -9,4 +9,4 @@ build
 .settings
 .project
 .DS_Store
-.gitignore
+/.gitignore
