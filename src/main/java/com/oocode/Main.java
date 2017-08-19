@@ -4,24 +4,24 @@ import okhttp3.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        int w = Integer.parseInt(args[0]);  // the width of the window
-        int h = Integer.parseInt(args[1]);  // the height of the window
-        int n = Integer.parseInt(args[2]);  // the number of windows of this size
-        String r = args[3];                 // the model name of these windows
+        int widthOfWindow = Integer.parseInt(args[0]);  // the width of the window
+        int heightOfWindow = Integer.parseInt(args[1]);  // the height of the window
+        int numberOfWindow = Integer.parseInt(args[2]);  // the number of windows of this size
+        String modelName = args[3];                 // the model name of these windows
         OkHttpClient client = new OkHttpClient();
 
         // the thickness of the frame depends on the model of window
-        int width = width(r, true);
-        int height = width(r, false);
+        int widthThicknessAllowance = ReturnWidthThicknessAllowance(modelName, true);
+        int heightThicknessAllowance = ReturnWidthThicknessAllowance(modelName, false);
 
-        RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(w, h, n, width, height);
-        if (h > 120){
-            requestBody = BodyBuilder.bodyBuilderForLargeOrders(w, h, n, width, height);
+        RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance);
+        if (heightOfWindow > 120){
+            requestBody = BodyBuilder.bodyBuilderForLargeOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance);
         }
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame
-        if ((w-width) * (h-height) * n > 20000) {
+        if ((widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow > 20000) {
             Request request = new Request.Builder()
                     .url("https://immense-fortress-19979.herokuapp.com/large-order")
                     .method("POST", RequestBody.create(null, new byte[0]))
@@ -50,28 +50,28 @@ public class Main {
         }
     }
 
-    public static int width(String r, boolean b) {
-        if (!b) return h(r, b);
-        if (r.equals("Churchill")) {
+    public static int ReturnWidthThicknessAllowance(String modelName, boolean isWidth) {
+        if (!isWidth) return ReturnHeightThicknessAllowance(modelName, isWidth);
+        if (modelName.equals("Churchill")) {
             return 4;
         }
-        if (r.equals("Victoria")) {
+        if (modelName.equals("Victoria")) {
             return 2;
         }
-        if (r.equals("Albert")) {
+        if (modelName.equals("Albert")) {
             return 3;
         }
         throw null; // model name isn't known
     }
 
-    public static int h(String r, boolean b) {
-        if (r.equals("Churchill")) {
+    public static int ReturnHeightThicknessAllowance(String modelName, boolean isWidth) {
+        if (modelName.equals("Churchill")) {
             return 3;
         }
-        if (r.equals("Victoria")) {
+        if (modelName.equals("Victoria")) {
             return 3;
         }
-        if (r.equals("Albert")) {
+        if (modelName.equals("Albert")) {
             return 4;
         }
         throw null; // model name isn't known
