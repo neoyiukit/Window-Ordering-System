@@ -4,10 +4,12 @@ import okhttp3.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-//        int widthOfWindow = Integer.parseInt(args[0]);  // the width of the window
-//        int heightOfWindow = Integer.parseInt(args[1]);  // the height of the window
-//        int numberOfWindow = Integer.parseInt(args[2]);  // the number of windows of this size
-//        String modelName = args[3];                 // the model name of these windows
+        int widthOfWindow = Integer.parseInt(args[0]);  // the width of the window
+        int heightOfWindow = Integer.parseInt(args[1]);  // the height of the window
+        int numberOfWindow = Integer.parseInt(args[2]);  // the number of windows of this size
+        String modelName = args[3];                 // the model name of these windows
+
+        new OrderGlass(widthOfWindow, heightOfWindow, numberOfWindow, modelName);
 //        OkHttpClient client = new OkHttpClient();
 //
 //        // the thickness of the frame depends on the model of window
