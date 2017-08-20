@@ -12,13 +12,17 @@ public class OrderGlass {
     int numberOfWindow;  // the number of windows of this size
     String modelName;                 // the model name of these windows
     OkHttpClient client = new OkHttpClient();
+    int widthThicknessAllowance;
+    int heightThicknessAllowance;
 
 
-    public OrderGlass(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) {
+    public OrderGlass(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
         this.widthOfWindow = widthOfWindow;
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
         this.modelName = modelName;
+        widthThicknessAllowance = ReturnWidthThicknessAllowance(this.modelName, true);
+        heightThicknessAllowance = ReturnWidthThicknessAllowance(this.modelName, false);
     }
 
     public int getWidthOfWindow() {
@@ -36,9 +40,6 @@ public class OrderGlass {
 
     // the thickness of the frame depends on the model of window
     public void orderDetermination() throws Exception {
-
-        int widthThicknessAllowance = ReturnWidthThicknessAllowance(modelName, true);
-        int heightThicknessAllowance = ReturnWidthThicknessAllowance(modelName, false);
 
         RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance);
         if (heightOfWindow > 120){
