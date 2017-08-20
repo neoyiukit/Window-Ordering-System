@@ -21,8 +21,8 @@ public class OrderGlass {
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
         this.modelName = modelName;
-        widthThicknessAllowance = ReturnWidthThicknessAllowance(this.modelName, true);
-        heightThicknessAllowance = ReturnWidthThicknessAllowance(this.modelName, false);
+        widthThicknessAllowance = ReturnWidthThicknessAllowance(this.modelName);
+        heightThicknessAllowance = ReturnHeightThicknessAllowance(this.modelName);
     }
 
     public int getWidthOfWindow() {
@@ -77,8 +77,7 @@ public class OrderGlass {
         }
     }
 
-    public static int ReturnWidthThicknessAllowance(String modelName, boolean isWidth) {
-        if (!isWidth) return ReturnHeightThicknessAllowance(modelName, isWidth);
+    public static int ReturnWidthThicknessAllowance(String modelName) {
         if (modelName.equals("Churchill")) {
             return 4;
         }
@@ -91,7 +90,7 @@ public class OrderGlass {
         throw null; // model name isn't known
     }
 
-    public static int ReturnHeightThicknessAllowance(String modelName, boolean isWidth) {
+    public static int ReturnHeightThicknessAllowance(String modelName) {
         if (modelName.equals("Churchill")) {
             return 3;
         }
