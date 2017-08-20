@@ -1,15 +1,18 @@
 package com.oocode;
 
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class MainTest {
 
     OrderGlass orderGlass;
-//    RequestBody mockRequestBody = mock(RequestBody.class);
-//    Request mockRequest = mock(Request.class);
+    RequestBody mockRequestBody = mock(RequestBody.class);
+    Request mockRequest = mock(Request.class);
 
     @Test
     public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
