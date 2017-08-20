@@ -48,4 +48,19 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
 //        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
         assertTrue("Total Area is smaller than 20000", total > 20000);
     }
+
+    @Test
+    public void testIfCallsSmallerOrderEndpoint() throws Exception{
+
+        // when
+        orderGlass = new OrderGlass(20, 20, 20, "Churchill");
+        orderGlass.orderDetermination();
+        int widthThicknessAllowance =  orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true);
+        int heightThicknessAllowance =  orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false);
+        int total = ((orderGlass.getWidthOfWindow() - widthThicknessAllowance) * (orderGlass.getHeightOfWindow() - heightThicknessAllowance) * orderGlass.getNumberOfWindow());
+
+        // Then
+//        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
+        assertTrue("Total Area is smaller than 20000", total < 20000);
+    }
 }
