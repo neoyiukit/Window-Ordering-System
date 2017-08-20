@@ -23,8 +23,8 @@ public class MainTest {
         assertEquals("Unmatched Height of Window Passed", 456, orderGlass.getHeightOfWindow());
         assertEquals("Unmatched Number of Window Passed", 789, orderGlass.getNumberOfWindow());
         assertEquals("Unmatched Window Model", "Churchill", orderGlass.getModelName());
-        assertEquals("Unmatched Width Thickness Allowance", 4, orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName()));
-        assertEquals("Unmatched Height Thickness Allowance", 3, orderGlass.ReturnHeightThicknessAllowance(orderGlass.getModelName()));
+        assertEquals("Unmatched Width Thickness Allowance", 4, ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName()));
+        assertEquals("Unmatched Height Thickness Allowance", 3, ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName()));
 
 //        main(new String[]{"123", "456", "789", "Churchill"});
 //        main(new String[]{"48", "36", "1", "Victoria"});
@@ -40,8 +40,8 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         // when
         orderGlass = new OrderGlass(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
-        int widthThicknessAllowance =  orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName());
-        int heightThicknessAllowance =  orderGlass.ReturnHeightThicknessAllowance(orderGlass.getModelName());
+        int widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName());
+        int heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName());
         int total = ((orderGlass.getWidthOfWindow() - widthThicknessAllowance) * (orderGlass.getHeightOfWindow() - heightThicknessAllowance) * orderGlass.getNumberOfWindow());
 
         // Then
@@ -55,8 +55,8 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         // when
         orderGlass = new OrderGlass(20, 20, 20, "Churchill");
         orderGlass.orderDetermination();
-        int widthThicknessAllowance =  orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName());
-        int heightThicknessAllowance =  orderGlass.ReturnHeightThicknessAllowance(orderGlass.getModelName());
+        int widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName());
+        int heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName());
         int total = ((orderGlass.getWidthOfWindow() - widthThicknessAllowance) * (orderGlass.getHeightOfWindow() - heightThicknessAllowance) * orderGlass.getNumberOfWindow());
 
         // Then
