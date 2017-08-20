@@ -37,6 +37,10 @@ public class OrderGlass {
     public String getModelName() {
         return modelName;
     }
+    public int getCalculatedTotal(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance) {
+        int total = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
+        return total;
+    }
 
     // the thickness of the frame depends on the model of window
     public void orderDetermination() throws Exception {
@@ -48,7 +52,7 @@ public class OrderGlass {
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame
-        if ((widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow > 20000) {
+        if ( getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000) {
             Request request = new Request.Builder()
                     .url("https://immense-fortress-19979.herokuapp.com/large-order")
                     .method("POST", RequestBody.create(null, new byte[0]))

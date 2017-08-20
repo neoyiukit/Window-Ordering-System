@@ -42,7 +42,7 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         orderGlass.orderDetermination();
         int widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName());
         int heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName());
-        int total = ((orderGlass.getWidthOfWindow() - widthThicknessAllowance) * (orderGlass.getHeightOfWindow() - heightThicknessAllowance) * orderGlass.getNumberOfWindow());
+        int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
 
         // Then
 //        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
@@ -57,10 +57,10 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         orderGlass.orderDetermination();
         int widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName());
         int heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName());
-        int total = ((orderGlass.getWidthOfWindow() - widthThicknessAllowance) * (orderGlass.getHeightOfWindow() - heightThicknessAllowance) * orderGlass.getNumberOfWindow());
+        int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
 
         // Then
 //        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
-        assertTrue("Total Area is smaller than 20000", total < 20000);
+        assertTrue("Total Area is larger than 20000", total < 20000);
     }
 }
