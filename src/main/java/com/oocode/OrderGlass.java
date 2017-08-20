@@ -21,8 +21,22 @@ public class OrderGlass {
         this.modelName = modelName;
     }
 
+    public int getWidthOfWindow() {
+        return widthOfWindow;
+    }
+    public int getHeightOfWindow() {
+        return heightOfWindow;
+    }
+    public int getNumberOfWindow() {
+        return numberOfWindow;
+    }
+    public String getModelName() {
+        return modelName;
+    }
+
+    // the thickness of the frame depends on the model of window
     public void orderDetermination() throws Exception {
-        // the thickness of the frame depends on the model of window
+
         int widthThicknessAllowance = ReturnWidthThicknessAllowance(modelName, true);
         int heightThicknessAllowance = ReturnWidthThicknessAllowance(modelName, false);
 

@@ -1,16 +1,28 @@
 package com.oocode;
 
+import org.junit.Assert;
 import org.junit.Test;
+import static org.junit.Assert.*;
+
 
 public class MainTest {
+
+    OrderGlass orderGlass;
+
     @Test
-    public void test1() throws Exception {
+    public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
         // do not run without changing "Ivan's Windows" in com.oocode.BodyBuilder to "test"
         // otherwise you have to pay for the order
 
-        OrderGlass orderGlass = new OrderGlass(123, 456, 789, "Churchill");
+        // When
+        orderGlass = new OrderGlass(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
 
+        // Then
+        assertEquals("Unmatched Width of Window Passed", 123, orderGlass.getWidthOfWindow());
+        assertEquals("Unmatched Height of Window Passed", 456, orderGlass.getHeightOfWindow());
+        assertEquals("Unmatched Number of Window Passed", 789, orderGlass.getNumberOfWindow());
+        assertEquals("Unmatched Window Model ", "Churchill", orderGlass.getModelName());
 
 //        main(new String[]{"123", "456", "789", "Churchill"});
 //        main(new String[]{"48", "36", "1", "Victoria"});
