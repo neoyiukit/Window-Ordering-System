@@ -1,11 +1,15 @@
 package com.oocode;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MainTest {
 
     OrderGlass orderGlass;
+//    RequestBody mockRequestBody = mock(RequestBody.class);
+//    Request mockRequest = mock(Request.class);
 
     @Test
     public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {

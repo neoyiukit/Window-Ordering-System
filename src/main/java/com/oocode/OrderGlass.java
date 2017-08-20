@@ -6,7 +6,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class OrderGlass implements getValues {
+public class OrderGlass implements GetValues {
     int widthOfWindow;  // the width of the window
     int heightOfWindow;  // the height of the window
     int numberOfWindow;  // the number of windows of this size
@@ -81,5 +81,4 @@ public class OrderGlass implements getValues {
             }
         }
     }
-
 }
