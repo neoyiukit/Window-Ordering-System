@@ -1,9 +1,7 @@
 package com.oocode;
 
-import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 
 public class MainTest {
 
@@ -30,5 +28,18 @@ public class MainTest {
 Thank you "test" for your large order (q=789, w=119, h=453, toughened). Order not really placed - nothing to pay
 Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really placed - nothing to pay
          */
+    }
+
+    @Test
+    public void testIfCallsLargeOrderEndpoint() throws Exception{
+
+        // when
+        orderGlass = new OrderGlass(123, 456, 789, "Churchill");
+        orderGlass.orderDetermination();
+        int total = orderGlass.getWidthOfWindow() * orderGlass.getHeightOfWindow() * orderGlass.getNumberOfWindow();
+
+        // Then
+//        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
+        assertTrue("Total Area is smaller than 20000", total > 20000);
     }
 }
