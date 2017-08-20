@@ -16,7 +16,7 @@ public class MainTest {
         orderGlass = new OrderGlass(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true));
-//        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false ));
+//        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false));
 
         // Then
         assertEquals("Unmatched Width of Window Passed", 123, orderGlass.getWidthOfWindow());
@@ -40,7 +40,9 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         // when
         orderGlass = new OrderGlass(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
-        int total = orderGlass.getWidthOfWindow() * orderGlass.getHeightOfWindow() * orderGlass.getNumberOfWindow();
+        int widthThicknessAllowance =  orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true);
+        int heightThicknessAllowance =  orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false);
+        int total = ((orderGlass.getWidthOfWindow() - widthThicknessAllowance) * (orderGlass.getHeightOfWindow() - heightThicknessAllowance) * orderGlass.getNumberOfWindow());
 
         // Then
 //        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
