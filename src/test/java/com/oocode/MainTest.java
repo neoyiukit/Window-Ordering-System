@@ -15,12 +15,16 @@ public class MainTest {
         // When
         orderGlass = new OrderGlass(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
+//        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true));
+//        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false ));
 
         // Then
         assertEquals("Unmatched Width of Window Passed", 123, orderGlass.getWidthOfWindow());
         assertEquals("Unmatched Height of Window Passed", 456, orderGlass.getHeightOfWindow());
         assertEquals("Unmatched Number of Window Passed", 789, orderGlass.getNumberOfWindow());
-        assertEquals("Unmatched Window Model ", "Churchill", orderGlass.getModelName());
+        assertEquals("Unmatched Window Model", "Churchill", orderGlass.getModelName());
+        assertEquals("Unmatched Width Thickness Allowance", 4, orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true));
+        assertEquals("Unmatched Height Thickness Allowance", 3, orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false));
 
 //        main(new String[]{"123", "456", "789", "Churchill"});
 //        main(new String[]{"48", "36", "1", "Victoria"});
