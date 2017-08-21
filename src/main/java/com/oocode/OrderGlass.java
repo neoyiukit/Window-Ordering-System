@@ -56,22 +56,23 @@ public class OrderGlass implements GetValues {
     public void orderDetermination() throws Exception {
 
         RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
-        if (heightOfWindow > 120){
+        if (heightOfWindow > 120) {
             requestBody = BodyBuilder.bodyBuilderForLargeOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
         }
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame
-        Request request = placeSmallOrder(requestBody);
+        Request request = RequestBuilder.placeSmallOrder(requestBody);
         try (Response response = client.newCall(request).execute()) {
             try (ResponseBody body = response.body()) {
-                assert body != null; System.out.println(body.string());
+                assert body != null;
+                System.out.println(body.string());
             }
         }
 
         if ((windowType.equals("plain") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000)
                 || (windowType.equals("toughened") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 18000)) {
-            request = placeLargeOrder(requestBody);
+            request = RequestBuilder.placeLargeOrder(requestBody);
             try (Response response = client.newCall(request).execute()) {
                 try (ResponseBody body = response.body()) {
                     assert body != null;
@@ -79,21 +80,6 @@ public class OrderGlass implements GetValues {
                 }
             }
             return;
-    }
-}
-    public Request placeLargeOrder (RequestBody requestBody){
-     return new Request.Builder()
-            .url("https://immense-fortress-19979.herokuapp.com/large-order")
-            .method("POST", RequestBody.create(null, new byte[0]))
-            .post(requestBody)
-            .build();
-}
-
-    public Request placeSmallOrder (RequestBody requestBody){
-        return new Request.Builder()
-                .url("https://immense-fortress-19979.herokuapp.com/order")
-                .method("POST", RequestBody.create(null, new byte[0]))
-                .post(requestBody)
-                .build();
+        }
     }
 }
