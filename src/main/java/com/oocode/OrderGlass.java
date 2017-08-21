@@ -12,7 +12,7 @@ public class OrderGlass implements GetValues {
     int numberOfWindow;  // the number of windows of this size
     String modelName;       // the model name of these windows
     String windowType;      // window type: plain or toughened
-    OkHttpClient client = new OkHttpClient();
+    OkHttpClient client = new OkHttpClient(); // TODO - OkhttpCLient
     int widthThicknessAllowance;
     int heightThicknessAllowance;
 
@@ -62,33 +62,38 @@ public class OrderGlass implements GetValues {
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame
-        if ((windowType.equals("plain") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000)
-                || (windowType.equals("toughened") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 18000)) {
-            Request request = new Request.Builder()
-                    .url("https://immense-fortress-19979.herokuapp.com/large-order")
-                    .method("POST", RequestBody.create(null, new byte[0]))
-                    .post(requestBody)
-                    .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            try (ResponseBody body = response.body()) {
-                assert body != null;
-                System.out.println(body.string());
-            }
-        }
-        return;
-        }
-
-        Request request = new Request.Builder()
-                .url("https://immense-fortress-19979.herokuapp.com/order")
-                .method("POST", RequestBody.create(null, new byte[0]))
-                .post(requestBody)
-                .build();
-
+        Request request = placeSmallOrder(requestBody);
         try (Response response = client.newCall(request).execute()) {
             try (ResponseBody body = response.body()) {
                 assert body != null; System.out.println(body.string());
             }
         }
+
+        if ((windowType.equals("plain") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000)
+                || (windowType.equals("toughened") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 18000)) {
+            request = placeLargeOrder(requestBody);
+            try (Response response = client.newCall(request).execute()) {
+                try (ResponseBody body = response.body()) {
+                    assert body != null;
+                    System.out.println(body.string());
+                }
+            }
+            return;
+    }
+}
+    public Request placeLargeOrder (RequestBody requestBody){
+     return new Request.Builder()
+            .url("https://immense-fortress-19979.herokuapp.com/large-order")
+            .method("POST", RequestBody.create(null, new byte[0]))
+            .post(requestBody)
+            .build();
+}
+
+    public Request placeSmallOrder (RequestBody requestBody){
+        return new Request.Builder()
+                .url("https://immense-fortress-19979.herokuapp.com/order")
+                .method("POST", RequestBody.create(null, new byte[0]))
+                .post(requestBody)
+                .build();
     }
 }

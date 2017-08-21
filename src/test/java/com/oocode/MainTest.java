@@ -76,6 +76,6 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         // Then
         assertThat("Total Area is larger than 20000", total, lessThanOrEqualTo(20000));
          // assertTrue("Total Area is larger than 20000", total < 20000);
-         // TODO: Make sure to compare the url if it goes to the large endpoint
+         // TODO: Make sure to compare the url if it goes to the small endpoint
     }
 }

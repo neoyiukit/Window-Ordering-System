@@ -1,7 +1,5 @@
 package com.oocode;
 
-import okhttp3.*;
-
 public class Main {
     public static void main(String[] args) throws Exception {
         int widthOfWindow = Integer.parseInt(args[0]);  // the width of the window
@@ -10,6 +8,8 @@ public class Main {
         String modelName = args[3];                 // the model name of these windows
 
         new OrderGlass(widthOfWindow, heightOfWindow, numberOfWindow, modelName);
+
+        // TODO User Inputs starting from here - including username (tester says tester in the content)
 //        OkHttpClient client = new OkHttpClient();
 //
 //        // the thickness of the frame depends on the model of window
