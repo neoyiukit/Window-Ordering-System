@@ -14,6 +14,7 @@ public class OrderGenerator implements GetValueHelper {
     int widthThicknessAllowance;
     int heightThicknessAllowance;
     int totalArea;
+    String orderURL = "https://immense-fortress-19979.herokuapp.com/order";
 
 
     public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
@@ -29,6 +30,9 @@ public class OrderGenerator implements GetValueHelper {
              this.windowType = "toughened";
         else
              this.windowType = "plain";
+
+        if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000)))
+            orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
     }
 
     @Override
@@ -50,13 +54,8 @@ public class OrderGenerator implements GetValueHelper {
     public void orderPlacementHelper() throws Exception {
 
         RequestBody requestBody = BodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
-
-        Request request = RequestBuilder.placeSmallOrder(requestBody);
+        Request request = RequestBuilder.placeAnyOrder(requestBody, orderURL);
         ResponseBuilder.responseBuilder(request, client);
 
-        if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000))) {
-            request = RequestBuilder.placeLargeOrder(requestBody);
-            ResponseBuilder.responseBuilder(request, client);
-        }
     }
 }

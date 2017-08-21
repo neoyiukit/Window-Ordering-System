@@ -4,17 +4,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class RequestBuilder {
-    public static Request placeLargeOrder (RequestBody requestBody){
+    public static Request placeAnyOrder (RequestBody requestBody, String orderURL){
         return new Request.Builder()
-                .url("https://immense-fortress-19979.herokuapp.com/large-order")
-                .method("POST", RequestBody.create(null, new byte[0]))
-                .post(requestBody)
-                .build();
-    }
-
-    public static Request placeSmallOrder (RequestBody requestBody){
-        return new Request.Builder()
-                .url("https://immense-fortress-19979.herokuapp.com/order")
+                .url(orderURL)
                 .method("POST", RequestBody.create(null, new byte[0]))
                 .post(requestBody)
                 .build();
