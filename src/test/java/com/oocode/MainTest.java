@@ -1,18 +1,15 @@
 package com.oocode;
 
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 
 public class MainTest {
 
     OrderGlass orderGlass;
-    RequestBody mockRequestBody = mock(RequestBody.class);
-    Request mockRequest = mock(Request.class);
+//    RequestBody mockRequestBody = mock(RequestBody.class);
+//    Request mockRequest = mock(Request.class);
 
     @Test
     public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
@@ -24,6 +21,7 @@ public class MainTest {
         orderGlass.orderDetermination();
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true));
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false));
+//        System.out.println(orderGlass.getWindowType());
 
         // Then
         assertEquals("Unmatched Width of Window Passed", 123, orderGlass.getWidthOfWindow());
@@ -32,6 +30,8 @@ public class MainTest {
         assertEquals("Unmatched Window Model", "Churchill", orderGlass.getModelName());
         assertEquals("Unmatched Width Thickness Allowance", 4, ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName()));
         assertEquals("Unmatched Height Thickness Allowance", 3, ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName()));
+        assertEquals("Unmatched Window Type", "toughened", orderGlass.getWindowType());
+
 
 //        main(new String[]{"123", "456", "789", "Churchill"});
 //        main(new String[]{"48", "36", "1", "Victoria"});

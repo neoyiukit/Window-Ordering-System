@@ -9,5 +9,6 @@ public interface GetValues {
     int getNumberOfWindow();
     String getModelName();
     int getCalculatedTotal(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance);
+    String getWindowType();
 }
 

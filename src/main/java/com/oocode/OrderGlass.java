@@ -11,6 +11,7 @@ public class OrderGlass implements GetValues {
     int heightOfWindow;  // the height of the window
     int numberOfWindow;  // the number of windows of this size
     String modelName;                 // the model name of these windows
+    String windowType;      // window type: plain or toughened
     OkHttpClient client = new OkHttpClient();
     int widthThicknessAllowance;
     int heightThicknessAllowance;
@@ -23,6 +24,11 @@ public class OrderGlass implements GetValues {
         this.modelName = modelName;
         widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(this.modelName);
         heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(this.modelName);
+
+        if(heightOfWindow > 120)
+             this.windowType = "toughened";
+        else
+             this.windowType = "plain";
     }
 
     @Override
@@ -42,13 +48,16 @@ public class OrderGlass implements GetValues {
         int total = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
         return total;
     }
+    public String getWindowType(){
+        return windowType;
+    }
 
     // the thickness of the frame depends on the model of window
     public void orderDetermination() throws Exception {
 
-        RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance);
+        RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
         if (heightOfWindow > 120){
-            requestBody = BodyBuilder.bodyBuilderForLargeOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance);
+            requestBody = BodyBuilder.bodyBuilderForLargeOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
         }
 
         // the glass pane is the size of the window minus allowance for
