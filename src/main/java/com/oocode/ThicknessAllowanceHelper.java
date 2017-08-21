@@ -1,6 +1,6 @@
 package com.oocode;
 
-public class ReturnThicknessAllowance {
+public class ThicknessAllowanceHelper {
     public static int ReturnWidthThicknessAllowance(String modelName) {
         if (modelName.equals("Churchill")) {
             return 4;

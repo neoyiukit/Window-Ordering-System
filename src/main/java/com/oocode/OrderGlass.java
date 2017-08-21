@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class OrderGlass implements GetValues {
+public class OrderGlass implements GetValueHelper {
     int widthOfWindow;  // the width of the window
     int heightOfWindow;  // the height of the window
     int numberOfWindow;  // the number of windows of this size
@@ -20,8 +20,8 @@ public class OrderGlass implements GetValues {
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
         this.modelName = modelName;
-        this.widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(this.modelName);
-        this.heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(this.modelName);
+        this.widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
+        this.heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
 
         if(heightOfWindow > 120 || (getCalculatedTotal(this.widthOfWindow, this.heightOfWindow, this.numberOfWindow, this.widthThicknessAllowance, this.heightThicknessAllowance) > 3000))
              this.windowType = "toughened";
