@@ -3,8 +3,6 @@ package com.oocode;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class OrderGlass implements GetValues {
     int widthOfWindow;  // the width of the window
@@ -60,26 +58,13 @@ public class OrderGlass implements GetValues {
             requestBody = BodyBuilder.bodyBuilderForLargeOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
         }
 
-        // the glass pane is the size of the window minus allowance for
-        // the thickness of the frame
         Request request = RequestBuilder.placeSmallOrder(requestBody);
-        try (Response response = client.newCall(request).execute()) {
-            try (ResponseBody body = response.body()) {
-                assert body != null;
-                System.out.println(body.string());
-            }
-        }
+        ResponseBuilder.responseBuilder(request, client);
 
         if ((windowType.equals("plain") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000)
                 || (windowType.equals("toughened") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 18000)) {
             request = RequestBuilder.placeLargeOrder(requestBody);
-            try (Response response = client.newCall(request).execute()) {
-                try (ResponseBody body = response.body()) {
-                    assert body != null;
-                    System.out.println(body.string());
-                }
-            }
-            return;
+            ResponseBuilder.responseBuilder(request, client);
         }
     }
 }
