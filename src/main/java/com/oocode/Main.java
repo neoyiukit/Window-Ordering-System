@@ -7,7 +7,7 @@ public class Main {
         int numberOfWindow = Integer.parseInt(args[2]);  // the number of windows of this size
         String modelName = args[3];                 // the model name of these windows
 
-        new OrderGlass(widthOfWindow, heightOfWindow, numberOfWindow, modelName);
+        new OrderGenerator(widthOfWindow, heightOfWindow, numberOfWindow, modelName);
 
         // TODO User Inputs starting from here - including username (tester says tester in the content)
 

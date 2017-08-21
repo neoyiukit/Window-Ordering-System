@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 public class MainTest {
 
-    OrderGlass orderGlass;
+    OrderGenerator orderGlass;
 //    RequestBody mockRequestBody = mock(RequestBody.class);
 //    Request mockRequest = mock(Request.class);
 
@@ -19,7 +19,7 @@ public class MainTest {
         // otherwise you have to pay for the order
 
         // When
-        orderGlass = new OrderGlass(50, 10, 10, "Churchill");
+        orderGlass = new OrderGenerator(50, 10, 10, "Churchill");
         orderGlass.orderDetermination();
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true));
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false));
@@ -51,7 +51,7 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
     public void testIfCallsLargeOrderEndpoint() throws Exception{
 
         // when
-        orderGlass = new OrderGlass(123, 456, 789, "Churchill");
+        orderGlass = new OrderGenerator(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
         int widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(orderGlass.getModelName());
         int heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(orderGlass.getModelName());
@@ -67,7 +67,7 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
     public void testIfCallsSmallerOrderEndpoint() throws Exception{
 
         // when
-        orderGlass = new OrderGlass(20, 20, 20, "Churchill");
+        orderGlass = new OrderGenerator(20, 20, 20, "Churchill");
         orderGlass.orderDetermination();
         int widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(orderGlass.getModelName());
         int heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(orderGlass.getModelName());

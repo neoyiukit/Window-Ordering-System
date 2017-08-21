@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class OrderGlass implements GetValueHelper {
+public class OrderGenerator implements GetValueHelper {
     int widthOfWindow;  // the width of the window
     int heightOfWindow;  // the height of the window
     int numberOfWindow;  // the number of windows of this size
@@ -15,7 +15,7 @@ public class OrderGlass implements GetValueHelper {
     int heightThicknessAllowance;
 
 
-    public OrderGlass(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
+    public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
         this.widthOfWindow = widthOfWindow;
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
