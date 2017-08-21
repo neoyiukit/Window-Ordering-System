@@ -10,7 +10,7 @@ public class OrderGlass implements GetValues {
     int widthOfWindow;  // the width of the window
     int heightOfWindow;  // the height of the window
     int numberOfWindow;  // the number of windows of this size
-    String modelName;                 // the model name of these windows
+    String modelName;       // the model name of these windows
     String windowType;      // window type: plain or toughened
     OkHttpClient client = new OkHttpClient();
     int widthThicknessAllowance;
@@ -22,10 +22,10 @@ public class OrderGlass implements GetValues {
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
         this.modelName = modelName;
-        widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(this.modelName);
-        heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(this.modelName);
+        this.widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(this.modelName);
+        this.heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(this.modelName);
 
-        if(heightOfWindow > 120)
+        if(heightOfWindow > 120 || (getCalculatedTotal(this.widthOfWindow, this.heightOfWindow, this.numberOfWindow, this.widthThicknessAllowance, this.heightThicknessAllowance) > 3000))
              this.windowType = "toughened";
         else
              this.windowType = "plain";

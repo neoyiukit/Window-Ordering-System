@@ -19,16 +19,20 @@ public class MainTest {
         // otherwise you have to pay for the order
 
         // When
-        orderGlass = new OrderGlass(123, 456, 789, "Churchill");
+        orderGlass = new OrderGlass(50, 10, 10, "Churchill");
         orderGlass.orderDetermination();
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), true));
 //        System.out.println(orderGlass.ReturnWidthThicknessAllowance(orderGlass.getModelName(), false));
 //        System.out.println(orderGlass.getWindowType());
+//        int widthThicknessAllowance = ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName());
+//        int heightThicknessAllowance = ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName());
+//        int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
+//        System.out.println(total);
 
         // Then
-        assertEquals("Unmatched Width of Window Passed", 123, orderGlass.getWidthOfWindow());
-        assertEquals("Unmatched Height of Window Passed", 456, orderGlass.getHeightOfWindow());
-        assertEquals("Unmatched Number of Window Passed", 789, orderGlass.getNumberOfWindow());
+        assertEquals("Unmatched Width of Window Passed", 50, orderGlass.getWidthOfWindow());
+        assertEquals("Unmatched Height of Window Passed", 10, orderGlass.getHeightOfWindow());
+        assertEquals("Unmatched Number of Window Passed", 10, orderGlass.getNumberOfWindow());
         assertEquals("Unmatched Window Model", "Churchill", orderGlass.getModelName());
         assertEquals("Unmatched Width Thickness Allowance", 4, ReturnThicknessAllowance.ReturnWidthThicknessAllowance(orderGlass.getModelName()));
         assertEquals("Unmatched Height Thickness Allowance", 3, ReturnThicknessAllowance.ReturnHeightThicknessAllowance(orderGlass.getModelName()));
