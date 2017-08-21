@@ -8,7 +8,7 @@ public interface GetValueHelper {
     int getHeightOfWindow();
     int getNumberOfWindow();
     String getModelName();
-    int getCalculatedTotal(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance);
+    int getCalculatedTotal();
     String getWindowType();
 }
 

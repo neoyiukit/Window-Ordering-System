@@ -53,12 +53,9 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         // when
         orderGlass = new OrderGenerator(123, 456, 789, "Churchill");
         orderGlass.orderDetermination();
-        int widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(orderGlass.getModelName());
-        int heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(orderGlass.getModelName());
-        int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
 
         // Then
-        assertThat("Total Area is smaller than 20000", total, greaterThan(20000));
+        assertThat("Total Area is smaller than 20000", orderGlass.getCalculatedTotal(), greaterThan(20000));
         // assertTrue("Total Area is smaller than 20000", total > 20000);
         // TODO: Make sure to compare the url if it goes to the large endpoint
     }
@@ -67,14 +64,11 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
     public void testIfCallsSmallerOrderEndpoint() throws Exception{
 
         // when
-        orderGlass = new OrderGenerator(20, 20, 20, "Churchill");
+        orderGlass = new OrderGenerator(2, 2, 2, "Churchill");
         orderGlass.orderDetermination();
-        int widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(orderGlass.getModelName());
-        int heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(orderGlass.getModelName());
-        int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
 
         // Then
-        assertThat("Total Area is larger than 20000", total, lessThanOrEqualTo(20000));
+        assertThat("Total Area is larger than 20000", orderGlass.getCalculatedTotal(), lessThanOrEqualTo(20000));
          // assertTrue("Total Area is larger than 20000", total < 20000);
          // TODO: Make sure to compare the url if it goes to the small endpoint
     }

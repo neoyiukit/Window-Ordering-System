@@ -13,6 +13,7 @@ public class OrderGenerator implements GetValueHelper {
     OkHttpClient client = new OkHttpClient(); // TODO - OkhttpCLient
     int widthThicknessAllowance;
     int heightThicknessAllowance;
+    int totalArea;
 
 
     public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
@@ -22,8 +23,9 @@ public class OrderGenerator implements GetValueHelper {
         this.modelName = modelName;
         this.widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
         this.heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
+        this.totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
 
-        if(heightOfWindow > 120 || (getCalculatedTotal(this.widthOfWindow, this.heightOfWindow, this.numberOfWindow, this.widthThicknessAllowance, this.heightThicknessAllowance) > 3000))
+        if((heightOfWindow > 120) || ( totalArea > 3000))
              this.windowType = "toughened";
         else
              this.windowType = "plain";
@@ -42,15 +44,11 @@ public class OrderGenerator implements GetValueHelper {
     public String getModelName() {
         return modelName;
     }
-    public int getCalculatedTotal(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance) {
-        int total = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
-        return total;
-    }
+    public int getCalculatedTotal() { return totalArea; }
     public String getWindowType(){
         return windowType;
     }
 
-    // the thickness of the frame depends on the model of window
     public void orderDetermination() throws Exception {
 
         RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
@@ -61,8 +59,7 @@ public class OrderGenerator implements GetValueHelper {
         Request request = RequestBuilder.placeSmallOrder(requestBody);
         ResponseBuilder.responseBuilder(request, client);
 
-        if ((windowType.equals("plain") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000)
-                || (windowType.equals("toughened") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 18000)) {
+        if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000))) {
             request = RequestBuilder.placeLargeOrder(requestBody);
             ResponseBuilder.responseBuilder(request, client);
         }
