@@ -62,7 +62,8 @@ public class OrderGlass implements GetValues {
 
         // the glass pane is the size of the window minus allowance for
         // the thickness of the frame
-        if ( getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000) {
+        if ((windowType.equals("plain") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 20000)
+                || (windowType.equals("toughened") && getCalculatedTotal(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance) > 18000)) {
             Request request = new Request.Builder()
                     .url("https://immense-fortress-19979.herokuapp.com/large-order")
                     .method("POST", RequestBody.create(null, new byte[0]))
