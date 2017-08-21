@@ -49,10 +49,7 @@ public class OrderGenerator implements GetValueHelper {
 
     public void orderPlacementHelper() throws Exception {
 
-        RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
-        if (heightOfWindow > 120) {
-            requestBody = BodyBuilder.bodyBuilderForLargeOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
-        }
+        RequestBody requestBody = BodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
 
         Request request = RequestBuilder.placeSmallOrder(requestBody);
         ResponseBuilder.responseBuilder(request, client);
