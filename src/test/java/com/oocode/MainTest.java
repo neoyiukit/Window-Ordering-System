@@ -17,6 +17,8 @@ public class MainTest {
     OrderGenerator newOrder;
     RequestBody mockRequestBody = mock(RequestBody.class);
     BodyBuilder mockBodyBuilder = mock(BodyBuilder.class);
+    RequestBuilder mockRequestBuilder = mock(RequestBuilder.class);
+    ResponseBuilder mockResponseBuilder = mock(ResponseBuilder.class);
 
     @Test
     public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
