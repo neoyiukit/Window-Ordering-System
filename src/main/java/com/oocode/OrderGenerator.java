@@ -47,7 +47,7 @@ public class OrderGenerator implements GetValueHelper {
         return windowType;
     }
 
-    public void orderDetermination() throws Exception {
+    public void orderPlacementHelper() throws Exception {
 
         RequestBody requestBody = BodyBuilder.bodyBuilderForSmallOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
         if (heightOfWindow > 120) {

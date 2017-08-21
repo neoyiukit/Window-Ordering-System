@@ -21,7 +21,7 @@ public class MainTest {
 
         // When
         newOrder = new OrderGenerator(50, 10, 10, "Churchill");
-        newOrder.orderDetermination();
+        newOrder.orderPlacementHelper();
 
         // Then
         assertEquals("Unmatched Width of Window Passed", 50, newOrder.getWidthOfWindow());
@@ -38,7 +38,7 @@ public class MainTest {
 
         // when
         newOrder = new OrderGenerator(123, 456, 789, "Churchill");
-        newOrder.orderDetermination();
+        newOrder.orderPlacementHelper();
 
         // Then
         assertThat("Total Area is smaller than 20000", newOrder.getCalculatedTotal(), greaterThan(20000));
@@ -50,8 +50,8 @@ public class MainTest {
     public void testIfCallsSmallerOrderEndpoint() throws Exception{
 
         // when
-        newOrder = new OrderGenerator(2, 2, 2, "Churchill");
-        newOrder.orderDetermination();
+        newOrder = new OrderGenerator(1, 121, 1, "Churchill");
+        newOrder.orderPlacementHelper();
 
         // Then
         assertThat("Total Area is larger than 20000", newOrder.getCalculatedTotal(), lessThanOrEqualTo(20000));
