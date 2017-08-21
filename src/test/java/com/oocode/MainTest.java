@@ -2,8 +2,10 @@ package com.oocode;
 
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class MainTest {
 
@@ -52,8 +54,9 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
 
         // Then
-//        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
-        assertTrue("Total Area is smaller than 20000", total > 20000);
+        assertThat("Total Area is smaller than 20000", total, greaterThan(20000));
+        // assertTrue("Total Area is smaller than 20000", total > 20000);
+        // TODO: Make sure to compare the url if it goes to the large endpoint
     }
 
     @Test
@@ -67,7 +70,8 @@ Thank you "test" for your order (q=1, w=46, h=33, plain). Order not really place
         int total = orderGlass.getCalculatedTotal(orderGlass.getWidthOfWindow(), orderGlass.getHeightOfWindow(), orderGlass.getNumberOfWindow(), widthThicknessAllowance, heightThicknessAllowance);
 
         // Then
-//        assertThat("Total Area < 20000", totalSum.greaterThan(20000)); - TODO: use hamcrest
-        assertTrue("Total Area is larger than 20000", total < 20000);
+        assertThat("Total Area is larger than 20000", total, lessThanOrEqualTo(20000));
+         // assertTrue("Total Area is larger than 20000", total < 20000);
+         // TODO: Make sure to compare the url if it goes to the large endpoint
     }
 }
