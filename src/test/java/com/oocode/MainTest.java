@@ -1,11 +1,13 @@
 package com.oocode;
 
+import okhttp3.RequestBody;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 // do not run without changing "Ivan's Windows" in com.oocode.BodyBuilder to "test"
 // otherwise you have to pay for the order
@@ -13,8 +15,8 @@ import static org.junit.Assert.assertEquals;
 public class MainTest {
 
     OrderGenerator newOrder;
-//    RequestBody mockRequestBody = mock(RequestBody.class);
-//    Request mockRequest = mock(Request.class);
+    RequestBody mockRequestBody = mock(RequestBody.class);
+    BodyBuilder mockBodyBuilder = mock(BodyBuilder.class);
 
     @Test
     public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
