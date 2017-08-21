@@ -38,9 +38,7 @@ public class OrderGenerator implements GetValueHelper {
     public int getHeightOfWindow() {
         return heightOfWindow;
     }
-    public int getNumberOfWindow() {
-        return numberOfWindow;
-    }
+    public int getNumberOfWindow() { return numberOfWindow; }
     public String getModelName() {
         return modelName;
     }
