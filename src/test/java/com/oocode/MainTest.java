@@ -11,6 +11,9 @@ import static org.mockito.Mockito.mock;
 // do not run without changing "Ivan's Windows" in com.oocode.BodyBuilder to "test"
 // otherwise you have to pay for the order
 
+//@RunWith(PowerMockRunner.class)
+//@PrepareForTest(.class)
+
 public class MainTest {
 
     OrderGenerator newOrder;
@@ -65,6 +68,9 @@ public class MainTest {
         // Then
         assertThat("Total Area is larger than 20000", newOrder.getCalculatedTotal(), lessThanOrEqualTo(20000));
         assertThat("The request is not sending to Large Order Endpoint", newOrder.orderURL, endsWith("/order"));
+
+//        Mockito.verify(mockBodyBuilder, Mockito.times(1)).someMethod("was called exactly three times");
+
 
         // assertTrue("Total Area is larger than 20000", total < 20000);
          // TODO: Make sure to compare the url if it goes to the small endpoint
