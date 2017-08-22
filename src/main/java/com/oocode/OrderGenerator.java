@@ -22,23 +22,21 @@ public class OrderGenerator implements GetValueHelper {
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
         this.modelName = modelName;
-        this.widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
-        this.heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
-        this.totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
+        widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
+        heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
+        totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
 
         if((heightOfWindow > 120) || ( totalArea > 3000))
-             this.windowType = "toughened";
+             windowType = "toughened";
         else
-             this.windowType = "plain";
+             windowType = "plain";
 
         if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000)))
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
     }
 
     @Override
-    public int getWidthOfWindow() {
-        return widthOfWindow;
-    }
+    public int getWidthOfWindow() { return widthOfWindow; }
     public int getHeightOfWindow() {
         return heightOfWindow;
     }

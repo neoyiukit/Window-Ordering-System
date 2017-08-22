@@ -4,8 +4,7 @@ import okhttp3.RequestBody;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -49,6 +48,7 @@ public class MainTest {
 
         // Then
         assertThat("Total Area is smaller than 20000", newOrder.getCalculatedTotal(), greaterThan(20000));
+        assertThat("The request is not sending to Large Order Endpoint", newOrder.orderURL, endsWith("/large-order"));
         // assertTrue("Total Area is smaller than 20000", total > 20000);
         // TODO: Make sure to compare the url if it goes to the large endpoint
     }
@@ -64,7 +64,9 @@ public class MainTest {
 
         // Then
         assertThat("Total Area is larger than 20000", newOrder.getCalculatedTotal(), lessThanOrEqualTo(20000));
-         // assertTrue("Total Area is larger than 20000", total < 20000);
+        assertThat("The request is not sending to Large Order Endpoint", newOrder.orderURL, endsWith("/order"));
+
+        // assertTrue("Total Area is larger than 20000", total < 20000);
          // TODO: Make sure to compare the url if it goes to the small endpoint
     }
 }
