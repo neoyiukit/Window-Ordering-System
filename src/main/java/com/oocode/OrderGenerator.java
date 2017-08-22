@@ -15,6 +15,7 @@ public class OrderGenerator implements GetValueHelper {
     int heightThicknessAllowance;
     int totalArea;
     String orderURL = "https://immense-fortress-19979.herokuapp.com/order";
+    String userName = "Tester";
 
 
     public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
@@ -51,7 +52,7 @@ public class OrderGenerator implements GetValueHelper {
 
     public void orderPlacementHelper() throws Exception {
 
-        RequestBody requestBody = BodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType);
+        RequestBody requestBody = BodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);
         Request request = RequestBuilder.placeAnyOrder(requestBody, orderURL);
         ResponseBuilder.responseBuilder(request, client);
 
