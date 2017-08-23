@@ -11,7 +11,7 @@ public class ThicknessAllowanceHelper {
         if (modelName.equals("Albert")) {
             return 3;
         }
-        throw new IllegalArgumentException("Type of Window should be equal to Churchill, Victoria or Albert");
+        throw new IllegalArgumentException("Model name should be equal to Churchill, Victoria or Albert");
     }
 
     public static int ReturnHeightThicknessAllowance(String modelName) {
@@ -24,6 +24,6 @@ public class ThicknessAllowanceHelper {
         if (modelName.equals("Albert")) {
             return 4;
         }
-        throw new IllegalArgumentException("Type of Window should be equal to Churchill, Victoria or Albert");
+        throw new IllegalArgumentException("Model name should be equal to Churchill, Victoria or Albert");
     }
 }

@@ -5,17 +5,17 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class OrderGenerator implements GetValueHelper {
-    int widthOfWindow;  // the width of the window
-    int heightOfWindow;  // the height of the window
-    int numberOfWindow;  // the number of windows of this size
-    String modelName;       // the model name of these windows
-    String windowType;      // window type: plain or toughened
+    private int widthOfWindow = 0;  // the width of the window
+    private int heightOfWindow = 0;  // the height of the window
+    private int numberOfWindow = 0;  // the number of windows of this size
+    private String modelName = "N/A";       // the model name of these windows
+    private String windowType = "N/A";      // window type: plain or toughened
     OkHttpClient client = new OkHttpClient(); // TODO - OkhttpCLient
-    int widthThicknessAllowance;
-    int heightThicknessAllowance;
-    int totalArea;
-    String orderURL = "https://immense-fortress-19979.herokuapp.com/order";
-    String userName = "Tester";
+    private int widthThicknessAllowance = 0;
+    private int heightThicknessAllowance = 0;
+    private int totalArea = 0;
+    private String orderURL = "https://immense-fortress-19979.herokuapp.com/order";
+    private String userName = "Tester";
 
 
     public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
