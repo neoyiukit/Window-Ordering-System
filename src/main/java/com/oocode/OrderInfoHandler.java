@@ -4,7 +4,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class OrderGenerator implements GetValueHelper {
+public class OrderInfoHandler implements GetValueHelper {
     private int widthOfWindow = 0;  // the width of the window
     private int heightOfWindow = 0;  // the height of the window
     private int numberOfWindow = 0;  // the number of windows of this size
@@ -18,7 +18,7 @@ public class OrderGenerator implements GetValueHelper {
     private String userName = "Tester";
 
 
-    public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
+    public OrderInfoHandler(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
         this.widthOfWindow = widthOfWindow;
         this.heightOfWindow = heightOfWindow;
         this.numberOfWindow = numberOfWindow;
@@ -49,6 +49,9 @@ public class OrderGenerator implements GetValueHelper {
     public String getWindowType(){
         return windowType;
     }
+    public String getOrderURL() { return orderURL;}
+    public String getUserName() { return userName;}
+
 
     public void orderPlacementHelper() throws Exception {
 

@@ -10,5 +10,7 @@ public interface GetValueHelper {
     String getModelName();
     int getCalculatedTotal();
     String getWindowType();
+    String getOrderURL();
+    String getUserName();
 }
 

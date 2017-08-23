@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 
 public class MainTest {
 
-    OrderGenerator newOrder;
+    OrderInfoHandler newOrder;
     RequestBody mockRequestBody = mock(RequestBody.class);
     BodyBuilder mockBodyBuilder = mock(BodyBuilder.class);
     RequestBuilder mockRequestBuilder = mock(RequestBuilder.class);
@@ -26,9 +26,9 @@ public class MainTest {
     public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
 
         // When
-        newOrder = new OrderGenerator(50, 10, 10, "Churchill");
+        newOrder = new OrderInfoHandler(50, 10, 10, "Churchill");
         newOrder.orderPlacementHelper();
-        System.out.println(newOrder.orderURL);
+        System.out.println(newOrder.getOrderURL());
 
         // Then
         assertEquals("Unmatched Width of Window Passed", 50, newOrder.getWidthOfWindow());
@@ -44,14 +44,14 @@ public class MainTest {
     public void testIfCallsLargeOrderEndpoint() throws Exception{
 
         // when
-        newOrder = new OrderGenerator(123, 456, 789, "Churchill");
+        newOrder = new OrderInfoHandler(123, 456, 789, "Churchill");
         newOrder.orderPlacementHelper();
-        System.out.println(newOrder.orderURL);
+        System.out.println(newOrder.getOrderURL());
 
 
         // Then
         assertThat("Total Area is smaller than 20000", newOrder.getCalculatedTotal(), greaterThan(20000));
-        assertThat("The request is not sending to Large Order Endpoint", newOrder.orderURL, endsWith("/large-order"));
+        assertThat("The request is not sending to Large Order Endpoint", newOrder.getOrderURL(), endsWith("/large-order"));
         // assertTrue("Total Area is smaller than 20000", total > 20000);
         // TODO: Make sure to compare the url if it goes to the large endpoint
     }
@@ -60,14 +60,14 @@ public class MainTest {
     public void testIfCallsSmallerOrderEndpoint() throws Exception{
 
         // when
-        newOrder = new OrderGenerator(1, 119, 1, "Churchill");
+        newOrder = new OrderInfoHandler(1, 119, 1, "Churchill");
         newOrder.orderPlacementHelper();
-        System.out.println(newOrder.orderURL);
+        System.out.println(newOrder.getOrderURL());
 
 
         // Then
         assertThat("Total Area is larger than 20000", newOrder.getCalculatedTotal(), lessThanOrEqualTo(20000));
-        assertThat("The request is not sending to Large Order Endpoint", newOrder.orderURL, endsWith("/order"));
+        assertThat("The request is not sending to Large Order Endpoint", newOrder.getOrderURL(), endsWith("/order"));
 
 //        Mockito.verify(mockBodyBuilder, Mockito.times(1)).someMethod("was called exactly three times");
 
