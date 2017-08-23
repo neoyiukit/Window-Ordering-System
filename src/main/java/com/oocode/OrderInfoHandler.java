@@ -41,12 +41,12 @@ public class OrderInfoHandler implements GetValueHelper {
     public int getCalculatedTotal() {
         totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
         if (totalArea < 0)
-            throw new IllegalArgumentException("Total area of the window could not be in negative!");
+            throw new IllegalArgumentException("Total area of the window could not be in negative!"); // make sure total calculated area will be positive
         return totalArea;
     }
 
     public String getWindowType() {
-        if((heightOfWindow > 120) || ( totalArea > 3000))
+        if((heightOfWindow > 120) || ( getCalculatedTotal() > 3000))
             windowType = "toughened";
         else
             windowType = "plain";
@@ -55,7 +55,7 @@ public class OrderInfoHandler implements GetValueHelper {
     }
 
     public String getOrderURL() {
-        if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000)))
+        if ( (getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000)))
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
         else
             orderURL = "https://immense-fortress-19979.herokuapp.com/order";
