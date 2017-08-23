@@ -15,7 +15,7 @@ public class OrderGenerator implements GetValueHelper {
     int heightThicknessAllowance;
     int totalArea;
     String orderURL = "https://immense-fortress-19979.herokuapp.com/order";
-    String userName = "Tester";
+    String userName = "";
 
 
     public OrderGenerator(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
