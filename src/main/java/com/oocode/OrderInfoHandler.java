@@ -18,11 +18,12 @@ public class OrderInfoHandler implements GetValueHelper {
     private String userName = "Tester";
 
 
-    public OrderInfoHandler(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName) throws Exception {
-        this.widthOfWindow = widthOfWindow;
-        this.heightOfWindow = heightOfWindow;
-        this.numberOfWindow = numberOfWindow;
-        this.modelName = modelName;
+    public OrderInfoHandler(String[] args) throws Exception {
+        this.widthOfWindow = Integer.parseUnsignedInt(args[0]); // using parseUnsignedInt to prompt the input value to be non-zero
+        this.heightOfWindow = Integer.parseUnsignedInt(args[1]);
+        this.numberOfWindow = Integer.parseUnsignedInt(args[2]);
+        this.modelName = args[3]; // argument inserts are String in nature
+        this.userName = args[4];
         widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
         heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
     }
@@ -44,8 +45,7 @@ public class OrderInfoHandler implements GetValueHelper {
         return totalArea;
     }
 
-    public String getWindowType(){
-
+    public String getWindowType() {
         if((heightOfWindow > 120) || ( totalArea > 3000))
             windowType = "toughened";
         else
@@ -55,7 +55,6 @@ public class OrderInfoHandler implements GetValueHelper {
     }
 
     public String getOrderURL() {
-
         if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000)))
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
         else
