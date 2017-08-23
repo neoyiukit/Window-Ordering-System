@@ -14,7 +14,7 @@ public class OrderInfoHandler implements GetValueHelper {
     private int widthThicknessAllowance = 0;
     private int heightThicknessAllowance = 0;
     private int totalArea = 0;
-    private String orderURL = "https://immense-fortress-19979.herokuapp.com/order";
+    private String orderURL = "N/A";
     private String userName = "Tester";
 
 
@@ -25,15 +25,6 @@ public class OrderInfoHandler implements GetValueHelper {
         this.modelName = modelName;
         widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
         heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
-        totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
-
-        if((heightOfWindow > 120) || ( totalArea > 3000))
-             windowType = "toughened";
-        else
-             windowType = "plain";
-
-        if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000)))
-            orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
     }
 
     @Override
@@ -45,13 +36,35 @@ public class OrderInfoHandler implements GetValueHelper {
     public String getModelName() {
         return modelName;
     }
-    public int getCalculatedTotal() { return totalArea; }
+
+    public int getCalculatedTotal() {
+        totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
+        if (totalArea < 0)
+            throw new IllegalArgumentException("Total area of the window could not be in negative!");
+        return totalArea;
+    }
+
     public String getWindowType(){
+
+        if((heightOfWindow > 120) || ( totalArea > 3000))
+            windowType = "toughened";
+        else
+            windowType = "plain";
+
         return windowType;
     }
-    public String getOrderURL() { return orderURL;}
-    public String getUserName() { return userName;}
 
+    public String getOrderURL() {
+
+        if ( (windowType.equals("plain") && (totalArea > 20000)) || (windowType.equals("toughened") && (totalArea> 18000)))
+            orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
+        else
+            orderURL = "https://immense-fortress-19979.herokuapp.com/order";
+
+        return orderURL;
+    }
+
+    public String getUserName() { return userName; }
 
     public void orderPlacementHelper() throws Exception {
 
