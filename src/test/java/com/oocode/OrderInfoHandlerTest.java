@@ -173,6 +173,33 @@ public class OrderInfoHandlerTest {
         assertEquals("Unmatched Calculated Total area with the expect output", OrderInfoHandler.getCalculatedTotal(), 6069);
     }
 
+    @Test
+    public void testingIfToughenedWindowTypeReturnedWithWindowHeightMoreThan120ButTotalAreaLowerThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be more than 120, so 121
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "121", "1", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (121-3) * 1 < 3000
+
+        assertEquals("Not returning toughened(type of window) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
+    }
+
+    @Test
+    public void testingIfToughenedWindowTypeReturnedWithWindowHeightLessThanOrEqual120ButTotalAreaHigherThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be less than 120, so 119
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "119", "100", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (119-3) * 100 > 3000
+
+        assertEquals("Not returning toughened(type of window) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
+    }
+
+    @Test
+    public void testingIfPlainWindowTypeReturnedWithWindowHeightLessThanOrEqual120AndTotalAreaLowerThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be less than 120, so 119
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "119", "10", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (119-3) * 10 < 3000
+
+        assertEquals("Not returning plain(type of window) under the conditions given", OrderInfoHandler.getWindowType(), "plain");
+    }
+
 //
 //    @Test
 //    public void testIfCallsLargeOrderEndpoint() throws Exception{
