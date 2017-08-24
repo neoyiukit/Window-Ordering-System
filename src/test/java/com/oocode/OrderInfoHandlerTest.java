@@ -3,9 +3,6 @@ package com.oocode;
 // do not run without changing "Ivan's Windows" in com.oocode.BodyBuilder to "test"
 // otherwise you have to pay for the order
 
-//@RunWith(PowerMockRunner.class)
-//@PrepareForTest(.class)
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -103,7 +100,7 @@ public class OrderInfoHandlerTest {
     }
 
     @Test
-    public void testingIfChurchillWidthThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+         public void testingIfChurchillWidthThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
 
         windowsOrderingSystem = new WindowsOrderingSystem();
         windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
@@ -129,15 +126,32 @@ public class OrderInfoHandlerTest {
         assertEquals("Unmatched Width Thickness Allowance of Albert", OrderInfoHandler.getWidthThicknessAllowance(), 3);
     }
 
-//    @Test
-//    public void SystemTestNegativeInvalidInputArea1() throws Exception {
-//        try {
-//            windowsOrderingSystem = new WindowsOrderingSystem();
-//            windowsOrderingSystem.OrderGenerator(new String[]{"2", "120", "5", "Victoria", "test"});
-//        } catch (Exception e) {
-//            assertEquals(e.getMessage(), "Inputs are negative");
-//        }
-//    }
+    @Test
+    public void testingIfChurchillHeightThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+
+        assertEquals("Unmatched Height Thickness Allowance of Churchill", OrderInfoHandler.getHeightThicknessAllowance(), 3);
+    }
+
+    @Test
+    public void testingIfVictoriaHeightThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Victoria", "test"});
+
+        assertEquals("Unmatched Height Thickness Allowance of Victoria", OrderInfoHandler.getHeightThicknessAllowance(), 3);
+    }
+
+    @Test
+    public void testingIfAlbertHeightThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Albert", "test"});
+
+        assertEquals("Unmatched Height Thickness Allowance of Albert", OrderInfoHandler.getHeightThicknessAllowance(), 4);
+    }
 
 //    @Test
 //    public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
@@ -191,19 +205,5 @@ public class OrderInfoHandlerTest {
 //
 //        // assertTrue("Total Area is larger than 20000", total < 20000);
 //         // TODO: Make sure to compare the url if it goes to the small endpoint
-//    }
-//    @Test
-//    public void testIfCallsLargeOrderEndpoint() throws Exception{
-//        WindowsOrderingSystem.OrderGenerator(new String[]{"30", "30", "40", "Victoria","test"});
-//    }
-
-//    @Test
-//    public void SystemTestInvalidInputArea() throws Exception {
-//        try {
-//            WindowsOrderingSystem windowsOrderingSystem = new WindowsOrderingSystem();
-//            windowsOrderingSystem.OrderGenerator(new String[]{"1", "1", "1", "invalid", "test"});
-//        } catch (Exception e) {
-//            assertEquals(e.getMessage(), " Check your window dimensions, glassArea appears to be negative");
-//        }
 //    }
 }
