@@ -145,7 +145,7 @@ public class OrderInfoHandlerTest {
     }
 
     @Test
-    public void testingIfAlbertHeightThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+     public void testingIfAlbertHeightThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
 
         windowsOrderingSystem = new WindowsOrderingSystem();
         windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Albert", "test"});
@@ -153,23 +153,26 @@ public class OrderInfoHandlerTest {
         assertEquals("Unmatched Height Thickness Allowance of Albert", OrderInfoHandler.getHeightThicknessAllowance(), 4);
     }
 
-//    @Test
-//    public void testIfTheInputMatchedFieldsInOrderGlass() throws Exception {
-//
-//        // When
-//        newOrder = new OrderInfoHandler(50, 10, 10, "Churchill");
-//        newOrder.orderPlacementHelper();
-//        System.out.println(newOrder.getOrderURL());
-//
-//        // Then
-//        assertEquals("Unmatched Width of Window Passed", 50, newOrder.getWidthOfWindow());
-//        assertEquals("Unmatched Height of Window Passed", 10, newOrder.getHeightOfWindow());
-//        assertEquals("Unmatched Number of Window Passed", 10, newOrder.getNumberOfWindow());
-//        assertEquals("Unmatched Window Model", "Churchill", newOrder.getModelName());
-//        assertEquals("Unmatched Width Thickness Allowance", 4, ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(newOrder.getModelName()));
-//        assertEquals("Unmatched Height Thickness Allowance", 3, ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(newOrder.getModelName()));
-//        assertEquals("Unmatched Window Type", "toughened", newOrder.getWindowType());
-//    }
+    @Test
+    public void testingIfCalculatedAreaIsNegative() throws Exception {
+        try {
+            windowsOrderingSystem = new WindowsOrderingSystem();
+            windowsOrderingSystem.OrderGenerator(new String[]{"0", "5", "1", "Albert", "test"}); // width will be negative after reconcile with the width thickness allowance of "Albert"
+            OrderInfoHandler.getCalculatedTotal();
+        } catch (Exception e) {
+            assertEquals(e.getMessage(), "Total area of the window could not be in negative!");
+        }
+    }
+
+    @Test
+    public void testingIfCalculatedAreaIsEqualToExpectedOutput() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Victoria", "test"}); // after applying the thick allowances the equation will be: (19-2) * (20-3) * 21 = 6069
+
+        assertEquals("Unmatched Calculated Total area with the expect output", OrderInfoHandler.getCalculatedTotal(), 6069);
+    }
+
 //
 //    @Test
 //    public void testIfCallsLargeOrderEndpoint() throws Exception{
