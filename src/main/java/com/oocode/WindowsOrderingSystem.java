@@ -1,6 +1,8 @@
 package com.oocode;
 
 public class WindowsOrderingSystem {
+    static OrderInfoHandler orderInfoHandler;
+    static OrderRequestsWrapper orderRequestsWrapper;
 
     public static void OrderGenerator(String[] args) throws Exception {
         int widthOfWindow = Integer.parseUnsignedInt(args[0]); // using parseUnsignedInt to prompt the input value to be non-zero - the width of the window
@@ -9,9 +11,7 @@ public class WindowsOrderingSystem {
         String modelName = args[3]; // the model name of these windows
         String userName = args[4]; // username of clients
 
-        new OrderInfoHandler(widthOfWindow, heightOfWindow, numberOfWindow, modelName, userName);
-
-        // TODO User Inputs starting from here - including username (tester says tester in the content)
-
+        orderInfoHandler = new OrderInfoHandler(widthOfWindow, heightOfWindow, numberOfWindow, modelName, userName);
+        OrderPlacementHelper.orderRequestGeneratpr(orderInfoHandler, orderRequestsWrapper);
     }
 }

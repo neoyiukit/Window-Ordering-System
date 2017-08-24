@@ -15,19 +15,21 @@ public class OrderRequestsWrapper implements OrderRequestsWrapperInterface {
         return request;
     }
 
+    @Override
     public Response getResponse() throws Exception {
         Response response = ResponseBuilder.responseGenerator(getRequest(), OrderInfoHandler.getClient());
         return response;
     }
 
+    @Override
     public ResponseBody getResponseBody() throws Exception {
         ResponseBody responseBody = ResponseBodyBuilder.printResponseBody(getResponse());
         return responseBody;
     }
 
+    @Override
     public String getResponseMessage() throws Exception {
         String responseMessage = ResponseMessage.returnResponseMessage(getResponseBody());
         return responseMessage;
     }
-
 }
