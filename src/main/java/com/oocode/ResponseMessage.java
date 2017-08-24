@@ -10,6 +10,7 @@ import java.io.IOException;
 public class ResponseMessage {
     public static String returnResponseMessage(ResponseBody responseBody) throws IOException {
         String responseMessage = responseBody.string();
+        System.out.println(responseMessage);
         if(responseBody != null)
             return responseMessage;
         throw new IOException();
