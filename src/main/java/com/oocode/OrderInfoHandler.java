@@ -32,10 +32,11 @@ public class OrderInfoHandler {
         return heightOfWindow;
     }
     public static int getNumberOfWindow() { return numberOfWindow; }
-    public String getModelName() {
+    public static String getModelName() {
         return modelName;
     }
     public static OkHttpClient getClient() { return client; }
+    public static String getUserName() { return userName; }
 
     public static int getCalculatedTotal() {
         totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
@@ -61,8 +62,6 @@ public class OrderInfoHandler {
 
         return orderURL;
     }
-
-    public String getUserName() { return userName; }
 
     public static RequestBody getRequestBody() throws Exception {
         RequestBody requestBody = RequestBodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);

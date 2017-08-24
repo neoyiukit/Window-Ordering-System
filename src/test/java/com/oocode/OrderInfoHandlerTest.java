@@ -55,13 +55,51 @@ public class OrderInfoHandlerTest {
     }
 
     @Test
-    public void testingIfWidthArgumentPassedCorrectly() throws Exception {
+     public void testingIfWidthArgumentPassedCorrectly() throws Exception {
 
-            windowsOrderingSystem = new WindowsOrderingSystem();
-            windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
 
-            assertEquals("Unmatched Width of Window Passed", OrderInfoHandler.getWidthOfWindow(), 19);
+        assertEquals("Unmatched Width of Window Passed", OrderInfoHandler.getWidthOfWindow(), 19);
 
+    }
+
+    @Test
+         public void testingIfHeightArgumentPassedCorrectly() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+
+        assertEquals("Unmatched Height of Window Passed", OrderInfoHandler.getHeightOfWindow(), 20);
+
+    }
+
+    @Test
+     public void testingIfNumberArgumentPassedCorrectly() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+
+        assertEquals("Unmatched Number of Window Passed", OrderInfoHandler.getNumberOfWindow(), 21);
+
+    }
+
+    @Test
+     public void testingIfWindowModelArgumentPassedCorrectly() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+
+        assertEquals("Unmatched Window Model Passed", OrderInfoHandler.getModelName(), "Churchill");
+    }
+
+    @Test
+    public void testingIfUserNameArgumentPassedCorrectly() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+
+        assertEquals("Unmatched UserName Passed", OrderInfoHandler.getUserName(), "test");
     }
 
 //    @Test
