@@ -3,7 +3,7 @@ package com.oocode;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class BodyBuilder {
+public class RequestBodyBuilder {
     public static RequestBody bodyBuilderForAnyOrders(int widthOfWindow, int heightOfWindow, int numberOfWindow, int widthThicknessAllowance, int heightThicknessAllowance, String windowType, String userName) {
         return new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)

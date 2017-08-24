@@ -3,6 +3,8 @@ package com.oocode;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class OrderInfoHandler implements GetValueHelper {
     private int widthOfWindow = 0;  // the width of the window
@@ -55,7 +57,7 @@ public class OrderInfoHandler implements GetValueHelper {
     }
 
     public String getOrderURL() {
-        if ( (getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000)))
+        if ((getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000)))
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
         else
             orderURL = "https://immense-fortress-19979.herokuapp.com/order";
@@ -65,11 +67,29 @@ public class OrderInfoHandler implements GetValueHelper {
 
     public String getUserName() { return userName; }
 
-    public void orderPlacementHelper() throws Exception {
-
-        RequestBody requestBody = BodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);
-        Request request = RequestBuilder.placeAnyOrder(requestBody, orderURL);
-        ResponseBuilder.responseBuilder(request, client);
-
+    public RequestBody getRequestBody() throws Exception {
+        RequestBody requestBody = RequestBodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);
+        return requestBody;
     }
+
+    public Request getRequest() throws Exception {
+        Request request = RequestBuilder.placeAnyOrder(getRequestBody(), orderURL);
+        return request;
+    }
+
+    public Response getResponse() throws Exception {
+        Response response = ResponseBuilder.responseGenerator(getRequest(), client);
+        return response;
+    }
+
+    public ResponseBody getResponseBody() throws Exception {
+        ResponseBody responseBody = ResponseBodyBuilder.printResponseBody(getResponse());
+        return responseBody;
+    }
+
+    public String getResponseMessage() throws Exception {
+        String responseMessage = ResponseMessage.returnResponseMessage(getResponseBody());
+        return responseMessage;
+    }
+
 }
