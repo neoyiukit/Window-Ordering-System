@@ -20,12 +20,12 @@ public class OrderInfoHandler implements GetValueHelper {
     private String userName = "Tester";
 
 
-    public OrderInfoHandler(String[] args) throws Exception {
-        this.widthOfWindow = Integer.parseUnsignedInt(args[0]); // using parseUnsignedInt to prompt the input value to be non-zero
-        this.heightOfWindow = Integer.parseUnsignedInt(args[1]);
-        this.numberOfWindow = Integer.parseUnsignedInt(args[2]);
-        this.modelName = args[3]; // argument inserts are String in nature
-        this.userName = args[4];
+    public OrderInfoHandler(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName, String userName) throws Exception {
+        this.widthOfWindow = widthOfWindow;
+        this.heightOfWindow = heightOfWindow;
+        this.numberOfWindow = numberOfWindow;
+        this.modelName = modelName;
+        this.userName = userName;
         widthThicknessAllowance = ThicknessAllowanceHelper.ReturnWidthThicknessAllowance(this.modelName);
         heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
     }
