@@ -13,6 +13,6 @@ public class WindowsOrderingSystem {
 
         orderInfoHandler = new OrderInfoHandler(widthOfWindow, heightOfWindow, numberOfWindow, modelName, userName);
         orderRequestsWrapper = new OrderRequestsWrapper(orderInfoHandler);
-        OrderPlacementHelper.orderRequestGenerator(orderInfoHandler, orderRequestsWrapper);
+        OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, orderRequestsWrapper);
     }
 }

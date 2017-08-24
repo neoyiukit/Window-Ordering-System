@@ -102,6 +102,33 @@ public class OrderInfoHandlerTest {
         assertEquals("Unmatched UserName Passed", OrderInfoHandler.getUserName(), "test");
     }
 
+    @Test
+    public void testingIfChurchillWidthThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Churchill", "test"});
+
+        assertEquals("Unmatched Width Thickness Allowance of Churchill", OrderInfoHandler.getWidthThicknessAllowance(), 4);
+    }
+
+    @Test
+    public void testingIfVictoriaWidthThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Victoria", "test"});
+
+        assertEquals("Unmatched Width Thickness Allowance of Victoria", OrderInfoHandler.getWidthThicknessAllowance(), 2);
+    }
+
+    @Test
+    public void testingIfAlbertWidthThicknessAllowancesAreCorrectlyRetrieved() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"19", "20", "21", "Albert", "test"});
+
+        assertEquals("Unmatched Width Thickness Allowance of Albert", OrderInfoHandler.getWidthThicknessAllowance(), 3);
+    }
+
 //    @Test
 //    public void SystemTestNegativeInvalidInputArea1() throws Exception {
 //        try {

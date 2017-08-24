@@ -37,6 +37,8 @@ public class OrderInfoHandler {
     }
     public static OkHttpClient getClient() { return client; }
     public static String getUserName() { return userName; }
+    public static int getWidthThicknessAllowance() { return widthThicknessAllowance;}
+    public static int getHeightThicknessAllowance() { return heightThicknessAllowance;}
 
     public static int getCalculatedTotal() {
         totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
