@@ -12,6 +12,7 @@ public class WindowsOrderingSystem {
         String userName = args[4]; // username of clients
 
         orderInfoHandler = new OrderInfoHandler(widthOfWindow, heightOfWindow, numberOfWindow, modelName, userName);
-        OrderPlacementHelper.orderRequestGeneratpr(orderInfoHandler, orderRequestsWrapper);
+        orderRequestsWrapper = new OrderRequestsWrapper(orderInfoHandler);
+        OrderPlacementHelper.orderRequestGenerator(orderInfoHandler, orderRequestsWrapper);
     }
 }

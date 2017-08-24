@@ -9,6 +9,12 @@ import okhttp3.ResponseBody;
  */
 public class OrderRequestsWrapper implements OrderRequestsWrapperInterface {
 
+    private OrderInfoHandler orderInfoHandler;
+
+    public OrderRequestsWrapper(OrderInfoHandler orderInfoHandler) {
+        this.orderInfoHandler = orderInfoHandler;
+    }
+
     @Override
     public Request getRequest() throws Exception {
         Request request = RequestBuilder.placeAnyOrder(OrderInfoHandler.getRequestBody(), OrderInfoHandler.getOrderURL());
