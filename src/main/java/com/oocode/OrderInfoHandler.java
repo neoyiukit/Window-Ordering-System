@@ -1,23 +1,20 @@
 package com.oocode;
 
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
-public class OrderInfoHandler implements GetValueHelper {
-    private int widthOfWindow = 0;  // the width of the window
-    private int heightOfWindow = 0;  // the height of the window
-    private int numberOfWindow = 0;  // the number of windows of this size
-    private String modelName = "N/A";       // the model name of these windows
-    private String windowType = "N/A";      // window type: plain or toughened
-    OkHttpClient client = new OkHttpClient(); // TODO - OkhttpCLient
-    private int widthThicknessAllowance = 0;
-    private int heightThicknessAllowance = 0;
-    private int totalArea = 0;
-    private String orderURL = "N/A";
-    private String userName = "Tester";
+public class OrderInfoHandler {
+    private static int widthOfWindow = 0;  // the width of the window
+    private static int heightOfWindow = 0;  // the height of the window
+    private static int numberOfWindow = 0;  // the number of windows of this size
+    private static String modelName = "N/A";       // the model name of these windows
+    private static String windowType = "N/A";      // window type: plain or toughened
+    private static OkHttpClient client = new OkHttpClient(); // TODO - OkhttpCLient
+    private static int widthThicknessAllowance = 0;
+    private static int heightThicknessAllowance = 0;
+    private static int totalArea = 0;
+    private static String orderURL = "N/A";
+    private static String userName = "Undefined";
 
 
     public OrderInfoHandler(int widthOfWindow, int heightOfWindow, int numberOfWindow, String modelName, String userName) throws Exception {
@@ -30,24 +27,24 @@ public class OrderInfoHandler implements GetValueHelper {
         heightThicknessAllowance = ThicknessAllowanceHelper.ReturnHeightThicknessAllowance(this.modelName);
     }
 
-    @Override
-    public int getWidthOfWindow() { return widthOfWindow; }
-    public int getHeightOfWindow() {
+    public static int getWidthOfWindow() { return widthOfWindow; }
+    public static int getHeightOfWindow() {
         return heightOfWindow;
     }
-    public int getNumberOfWindow() { return numberOfWindow; }
+    public static int getNumberOfWindow() { return numberOfWindow; }
     public String getModelName() {
         return modelName;
     }
+    public static OkHttpClient getClient() { return client; }
 
-    public int getCalculatedTotal() {
+    public static int getCalculatedTotal() {
         totalArea = (widthOfWindow - widthThicknessAllowance) * (heightOfWindow - heightThicknessAllowance) * numberOfWindow;
         if (totalArea < 0)
             throw new IllegalArgumentException("Total area of the window could not be in negative!"); // make sure total calculated area will be positive
         return totalArea;
     }
 
-    public String getWindowType() {
+    public static String getWindowType() {
         if((heightOfWindow > 120) || ( getCalculatedTotal() > 3000))
             windowType = "toughened";
         else
@@ -56,7 +53,7 @@ public class OrderInfoHandler implements GetValueHelper {
         return windowType;
     }
 
-    public String getOrderURL() {
+    public static String getOrderURL() {
         if ((getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000)))
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
         else
@@ -67,29 +64,8 @@ public class OrderInfoHandler implements GetValueHelper {
 
     public String getUserName() { return userName; }
 
-    public RequestBody getRequestBody() throws Exception {
+    public static RequestBody getRequestBody() throws Exception {
         RequestBody requestBody = RequestBodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);
         return requestBody;
     }
-
-    public Request getRequest() throws Exception {
-        Request request = RequestBuilder.placeAnyOrder(getRequestBody(), orderURL);
-        return request;
-    }
-
-    public Response getResponse() throws Exception {
-        Response response = ResponseBuilder.responseGenerator(getRequest(), client);
-        return response;
-    }
-
-    public ResponseBody getResponseBody() throws Exception {
-        ResponseBody responseBody = ResponseBodyBuilder.printResponseBody(getResponse());
-        return responseBody;
-    }
-
-    public String getResponseMessage() throws Exception {
-        String responseMessage = ResponseMessage.returnResponseMessage(getResponseBody());
-        return responseMessage;
-    }
-
 }
