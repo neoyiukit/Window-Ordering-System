@@ -8,7 +8,7 @@ public class OrderInfoHandler {
     private static int heightOfWindow = 0;  // the height of the window
     private static int numberOfWindow = 0;  // the number of windows of this size
     private static String modelName = "N/A";       // the model name of these windows
-    private static String windowType = "N/A";      // window type: plain or toughened
+    private static String glassType = "N/A";      // window type: plain or toughened
     private static OkHttpClient client = new OkHttpClient(); // TODO - OkhttpCLient
     private static int widthThicknessAllowance = 0;
     private static int heightThicknessAllowance = 0;
@@ -47,13 +47,13 @@ public class OrderInfoHandler {
         return totalArea;
     }
 
-    public static String getWindowType() {
+    public static String getGlassType() {
         if((heightOfWindow > 120) || ( getCalculatedTotal() > 3000))
-            windowType = "toughened";
+            glassType = "toughened";
         else
-            windowType = "plain";
+            glassType = "plain";
 
-        return windowType;
+        return glassType;
     }
 
 //  -----------Condition before Question 2---------
@@ -68,7 +68,7 @@ public class OrderInfoHandler {
 
     public static String getOrderURL() {
         // should be if ((getWindowType().equals("toughened")) && (getCalculatedTotal()> 18000)) instead after the demonstration of Question 2
-        if ((getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000))) // after the deployment of question 2, the former condition will be ignored as > 3000 will anyway return window type of "toughened"
+        if ((getGlassType().equals("plain") && (getCalculatedTotal() > 20000)) || (getGlassType().equals("toughened") && (getCalculatedTotal()> 18000))) // after the deployment of question 2, the former condition will be ignored as > 3000 will anyway return window type of "toughened"
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
         else
             orderURL = "https://immense-fortress-19979.herokuapp.com/order";
@@ -87,7 +87,7 @@ public class OrderInfoHandler {
 //    }
 
     public static RequestBody getRequestBody() throws Exception {
-        RequestBody requestBody = RequestBodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);
+        RequestBody requestBody = RequestBodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, glassType, userName);
         return requestBody;
     }
 }
