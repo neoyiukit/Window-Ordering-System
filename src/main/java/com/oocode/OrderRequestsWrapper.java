@@ -17,13 +17,13 @@ public class OrderRequestsWrapper implements OrderRequestsWrapperInterface {
 
     @Override
     public Request getRequest() throws Exception {
-        Request request = RequestBuilder.placeAnyOrder(OrderInfoHandler.getRequestBody(), OrderInfoHandler.getOrderURL());
+        Request request = RequestBuilder.placeAnyOrder(orderInfoHandler.getRequestBody(), orderInfoHandler.getOrderURL());
         return request;
     }
 
     @Override
     public Response getResponse() throws Exception {
-        Response response = ResponseBuilder.responseGenerator(getRequest(), OrderInfoHandler.getClient());
+        Response response = ResponseBuilder.responseGenerator(getRequest(), orderInfoHandler.getClient());
         return response;
     }
 

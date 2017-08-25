@@ -12,4 +12,5 @@ public class OrderPlacementExecuter {
         orderRequestsWrapper.getResponseBody();
         orderRequestsWrapper.getResponseMessage();
     }
+//    public static String getOrderResponseMessage() throws Exception { return OrderRequestsWrapper.getResponseMessage(); }
 }

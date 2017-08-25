@@ -50,4 +50,83 @@ public class WindowOrderingSystemTest {
             assertEquals(e.getMessage(), "Model name should be equal to Churchill, Victoria or Albert");
         }
     }
+
+    @Test
+    public void testingIfTheCorrectOrderPlaced() throws Exception {
+            windowsOrderingSystem = new WindowsOrderingSystem();
+            windowsOrderingSystem.OrderGenerator(new String[]{"10", "10", "10", "Churchill", "test"});
+
+            assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your order (q=10, w=6, h=7, plain). Order not really placed - nothing to pay");
+    }
+
+    @Test
+    public void testingIfToughenedGlassOrderPlacedWithWindowHeightMoreThan120AndTotalAreaHigherThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "121", "100", "Victoria", "test"});        // make sure the window height will be more than 120, so 121
+        // after applying the thick allowances the equation will be: (3-2) * (121-3) * 100 > 3000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your order (q=100, w=1, h=118, toughened). Order not really placed - nothing to pay");
+    }
+
+    @Test
+    public void testingIfToughenedGlassOrderPlacedWithWindowHeightMoreThan120ButTotalAreaLowerThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "121", "1", "Victoria", "test"});        // make sure the window height will be more than 120, so 121
+        // after applying the thick allowances the equation will be: (3-2) * (121-3) * 1 < 3000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your order (q=1, w=1, h=118, toughened). Order not really placed - nothing to pay");
+    }
+
+    @Test
+    public void testingIfToughenedGlassOrderPlacedWithWindowHeightLessThanOrEqual120ButTotalAreaHigherThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "119", "100", "Victoria", "test"});        // make sure the window height will be less than 120, so 119
+        // after applying the thick allowances the equation will be: (3-2) * (119-3) * 100 > 3000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your order (q=100, w=1, h=116, toughened). Order not really placed - nothing to pay");
+    }
+
+    @Test
+    public void testingIfPlainGlassOrderPlacedWithWindowHeightLessThanOrEqual120AndTotalAreaLowerThan3000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "119", "10", "Victoria", "test"});        // make sure the window height will be less than 120, so 119
+        // after applying the thick allowances the equation will be: (3-2) * (119-3) * 10 < 3000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your order (q=10, w=1, h=116, plain). Order not really placed - nothing to pay");
+    }
+
+    @Test
+    public void testingIfLargeEndpointOrderPlacedWhenToughenedGlassTypeAndTotalAreaMoreThan18000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"5", "121", "1000", "Churchill", "test"});        // Height = 121 to make sure toughened glass type will be returned
+        // after applying the thick allowances the equation will be: (5-4) * (121-3) * 1000 > 18000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your large order (q=1000, w=1, h=118, toughened). Order not really placed - nothing to pay");
+    }
+
+    @Test
+    public void testingIfNormalEndpointOrderPlacedWhenToughenedGlassTypeAndTotalAreaLessThan18000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"5", "121", "10", "Churchill", "test"});         // Height = 121 to make sure toughened glass type will be returned
+        // after applying the thick allowances the equation will be: (5-4) * (121-3) * 10 < 18000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your order (q=10, w=1, h=118, toughened). Order not really placed - nothing to pay");
+    }
+
+
+    @Test // Remark for this test as Total Area larger than 3000 will anyway return toughened glass type so it will basically shift to the second condition: "if ((getWindowType().equals("toughened")) && (getCalculatedTotal()> 18000))"
+    public void testingIfNormalEndpointOrderPlacedWhenPlainGlassTypeAndTotalAreaMoreThan20000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem();
+        windowsOrderingSystem.OrderGenerator(new String[]{"5", "119", "1000", "Churchill", "test"});         // Height = 119 to make sure plain window type will be returned
+        // after applying the thick allowances the equation will be: (5-4) * (119-3) * 10 > 20000
+
+        assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your large order (q=1000, w=1, h=116, toughened). Order not really placed - nothing to pay");
+    }
 }

@@ -15,4 +15,6 @@ public class WindowsOrderingSystem {
         orderRequestsWrapper = new OrderRequestsWrapper(orderInfoHandler);
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, orderRequestsWrapper);
     }
+
+    public static String getOrderResponseMessage() throws Exception { return orderRequestsWrapper.getResponseMessage(); }
 }

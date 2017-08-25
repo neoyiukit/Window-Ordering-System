@@ -195,7 +195,7 @@ public class OrderInfoHandlerTest {
     }
 
     @Test
-    public void testingIfNormalEndpointReturnedWhenToughenedGlassTypeAndTotalAreaMoreThan18000() throws Exception {
+    public void testingIfNormalEndpointReturnedWhenToughenedGlassTypeAndTotalAreaLowerThan18000() throws Exception {
 
         new OrderInfoHandler(5, 121, 10, "Churchill", "test");
 
@@ -216,30 +216,4 @@ public class OrderInfoHandlerTest {
 
         assertEquals("Not returning normal endpoint under the conditions given", OrderInfoHandler.getOrderURL(), "https://immense-fortress-19979.herokuapp.com/large-order");
     }
-
-
-//    @Test
-//    public void testingIfRequestBodyBuilderTalksToNormalEndpoint() throws Exception{
-//
-//        RequestBodyBuilder mockRequestBodyBuilder = mock(RequestBodyBuilder.class);
-//        RequestBody requestBody = new RequestBody() {
-//            @Override
-//            public MediaType contentType() {
-//                return null;
-//            }
-//
-//            @Override
-//            public void writeTo(BufferedSink sink) throws IOException {
-//
-//            }
-//        };
-//
-//        when(mockRequestBodyBuilder.bodyBuilderForAnyOrders(anyInt(), anyInt(), anyInt(), anyInt(), anyInt(), anyString(), anyString())).thenReturn(requestBody);
-//
-//        OrderInfoHandler orderInfoHandler = new OrderInfoHandler(5, 119, 1000, "Churchill", "test");
-//
-//        Mockito.verify(mockRequestBodyBuilder, times(1)).bodyBuilderForAnyOrders(anyInt(), anyInt(), anyInt(), anyInt(), anyInt(), anyString(), anyString());
-//        Mockito.verifyNoMoreInteractions(mockRequestBodyBuilder);
-//        assertEquals(orderInfoHandler.getRequestBody(), requestBody);
-//    }
 }
