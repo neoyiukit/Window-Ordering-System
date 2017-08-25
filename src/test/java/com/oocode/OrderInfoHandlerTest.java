@@ -174,31 +174,68 @@ public class OrderInfoHandlerTest {
     }
 
     @Test
-    public void testingIfToughenedWindowTypeReturnedWithWindowHeightMoreThan120ButTotalAreaLowerThan3000() throws Exception {
+    public void testingIfToughenedGlassTypeReturnedWithWindowHeightMoreThan120AndTotalAreaHigherThan3000() throws Exception {
+        windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be more than 120, so 121
+        windowsOrderingSystem.OrderGenerator(new String[]{"3", "121", "100", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (121-3) * 100 > 3000
+
+        assertEquals("Not returning toughened(type of glass) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
+    }
+
+    @Test
+    public void testingIfToughenedGlassTypeReturnedWithWindowHeightMoreThan120ButTotalAreaLowerThan3000() throws Exception {
 
         windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be more than 120, so 121
         windowsOrderingSystem.OrderGenerator(new String[]{"3", "121", "1", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (121-3) * 1 < 3000
 
-        assertEquals("Not returning toughened(type of window) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
+        assertEquals("Not returning toughened(type of glass) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
     }
 
     @Test
-    public void testingIfToughenedWindowTypeReturnedWithWindowHeightLessThanOrEqual120ButTotalAreaHigherThan3000() throws Exception {
+    public void testingIfToughenedGlassTypeReturnedWithWindowHeightLessThanOrEqual120ButTotalAreaHigherThan3000() throws Exception {
 
         windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be less than 120, so 119
         windowsOrderingSystem.OrderGenerator(new String[]{"3", "119", "100", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (119-3) * 100 > 3000
 
-        assertEquals("Not returning toughened(type of window) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
+        assertEquals("Not returning toughened(type of glass) under the conditions given", OrderInfoHandler.getWindowType(), "toughened");
     }
 
     @Test
-    public void testingIfPlainWindowTypeReturnedWithWindowHeightLessThanOrEqual120AndTotalAreaLowerThan3000() throws Exception {
+    public void testingIfPlainGlassTypeReturnedWithWindowHeightLessThanOrEqual120AndTotalAreaLowerThan3000() throws Exception {
 
         windowsOrderingSystem = new WindowsOrderingSystem(); // make sure the window height will be less than 120, so 119
         windowsOrderingSystem.OrderGenerator(new String[]{"3", "119", "10", "Victoria", "test"}); // after applying the thick allowances the equation will be: (3-2) * (119-3) * 10 < 3000
 
-        assertEquals("Not returning plain(type of window) under the conditions given", OrderInfoHandler.getWindowType(), "plain");
+        assertEquals("Not returning plain(type of glass) under the conditions given", OrderInfoHandler.getWindowType(), "plain");
     }
+
+    @Test
+    public void testingIfLargeEndpointReturnedWhenToughenedGlassTypeAndTotalAreaMoreThan18000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem(); // Height = 121 to make sure toughened glass type will be returned
+        windowsOrderingSystem.OrderGenerator(new String[]{"5", "121", "1000", "Churchill", "test"}); // after applying the thick allowances the equation will be: (5-4) * (121-3) * 1000 > 18000
+
+        assertEquals("Not returning large endpoint under the conditions given", OrderInfoHandler.getOrderURL(), "https://immense-fortress-19979.herokuapp.com/large-order");
+    }
+
+    @Test
+    public void testingIfNormalEndpointReturnedWhenToughenedGlassTypeAndTotalAreaMoreThan18000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem(); // Height = 121 to make sure toughened glass type will be returned
+        windowsOrderingSystem.OrderGenerator(new String[]{"5", "121", "10", "Churchill", "test"}); // after applying the thick allowances the equation will be: (5-4) * (121-3) * 10 < 18000
+
+        assertEquals("Not returning normal endpoint under the conditions given", OrderInfoHandler.getOrderURL(), "https://immense-fortress-19979.herokuapp.com/order");
+    }
+
+
+    @Test // Remark for this test as Total Area larger than 3000 will anyway return toughened glass type so it will basically shift to the second condition: "if ((getWindowType().equals("toughened")) && (getCalculatedTotal()> 18000))"
+    public void testingIfNormalEndpointReturnedWhenPlainWindowTypeAndTotalAreaMoreThan20000() throws Exception {
+
+        windowsOrderingSystem = new WindowsOrderingSystem(); // Height = 119 to make sure plain window type will be returned
+        windowsOrderingSystem.OrderGenerator(new String[]{"5", "119", "1000", "Churchill", "test"}); // after applying the thick allowances the equation will be: (5-4) * (119-3) * 10 > 20000
+
+        assertEquals("Not returning normal endpoint under the conditions given", OrderInfoHandler.getOrderURL(), "https://immense-fortress-19979.herokuapp.com/large-order");
+    }
+
 
 //
 //    @Test

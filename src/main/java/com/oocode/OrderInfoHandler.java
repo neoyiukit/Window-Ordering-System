@@ -56,14 +56,35 @@ public class OrderInfoHandler {
         return windowType;
     }
 
+//  -----------Condition before Question 2---------
+//  public static String getWindowType() {
+//        if((heightOfWindow > 120)
+//            windowType = "toughened";
+//        else
+//            windowType = "plain";
+//
+//        return windowType;
+//    }
+
     public static String getOrderURL() {
-        if ((getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000)))
+        // should be if ((getWindowType().equals("toughened")) && (getCalculatedTotal()> 18000)) instead after the demonstration of Question 2
+        if ((getWindowType().equals("plain") && (getCalculatedTotal() > 20000)) || (getWindowType().equals("toughened") && (getCalculatedTotal()> 18000))) // after the deployment of question 2, the former condition will be ignored as > 3000 will anyway return window type of "toughened"
             orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
         else
             orderURL = "https://immense-fortress-19979.herokuapp.com/order";
 
         return orderURL;
     }
+
+//    -------------Condition before Question 1 --------------
+//    public static String getOrderURL() {
+//        if (getCalculatedTotal() > 20000)
+//            orderURL = "https://immense-fortress-19979.herokuapp.com/large-order";
+//        else
+//            orderURL = "https://immense-fortress-19979.herokuapp.com/order";
+//
+//        return orderURL;
+//    }
 
     public static RequestBody getRequestBody() throws Exception {
         RequestBody requestBody = RequestBodyBuilder.bodyBuilderForAnyOrders(widthOfWindow, heightOfWindow, numberOfWindow, widthThicknessAllowance, heightThicknessAllowance, windowType, userName);
