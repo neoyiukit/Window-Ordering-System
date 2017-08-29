@@ -131,7 +131,7 @@ public class WindowOrderingSystemTest {
         assertEquals("Order Messages do not match!", windowsOrderingSystem.getOrderResponseMessage(), "Thank you \"test\" for your large order (q=1000, w=1, h=116, toughened). Order not really placed - nothing to pay");
     }
 
-    @Test(expected = java.lang.NullPointerException.class)
+    @Test(expected = org.mockito.exceptions.misusing.InvalidUseOfMatchersException.class)
      public void testingIfGetOrderResponseMessageInWindowsOrderingSystemGetCalledOnce() throws Exception {
         // GIVEN
         WindowsOrderingSystem mockWindowsOrderingSystem = mock(WindowsOrderingSystem.class);
@@ -146,11 +146,11 @@ public class WindowOrderingSystemTest {
         verify(mockWindowsOrderingSystem, times(1)).getOrderResponseMessage();
     }
 
-    @Test(expected = java.lang.NullPointerException.class)
+    @Test(expected = org.mockito.exceptions.misusing.MissingMethodInvocationException.class)
     public void testingIfGetOrderResponseMessageInWindowsOrderingSystemCouldBeSkipped() throws Exception {
         // GIVEN
         WindowsOrderingSystem mockWindowsOrderingSystem = mock(WindowsOrderingSystem.class);
-        OrderInfoHandler orderInfoHandler = new OrderInfoHandler(19, 20, 21, "Victoria", "test");
+        OrderInfoHandler orderInfoHandler = new OrderInfoHandler(20, 21, 22, "Victoria", "test");
         OrderRequestsWrapper orderRequestsWrapper = new OrderRequestsWrapper(orderInfoHandler);
 
         // WHEN
