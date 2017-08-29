@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
  */
 public class OrderPlacementExecuterTest {
     @Test(expected = org.mockito.exceptions.misusing.InvalidUseOfMatchersException.class)
-    public void testingIfRequestBodyBuilderTalksToNormalEndpointAndGetCalledAtLeastOnce() throws Exception{
+    public void testingIfRequestBodyBuilderGetsCalledAtLeastOnce() throws Exception{
 
         // GIVEN
         OrderInfoHandler orderInfoHandler = new OrderInfoHandler(5, 119, 1000, "Churchill", "test");
