@@ -4,7 +4,6 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.io.IOException;
 
@@ -43,7 +42,7 @@ public class OrderPlacementExecuterTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, orderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockRequestBodyBuilder, atLeastOnce()).bodyBuilderForAnyOrders(OrderInfoHandler.getWidthOfWindow(), OrderInfoHandler.getHeightOfWindow(), OrderInfoHandler.getNumberOfWindow(), OrderInfoHandler.getWidthThicknessAllowance(), OrderInfoHandler.getHeightThicknessAllowance(), OrderInfoHandler.getGlassType(), OrderInfoHandler.getUserName());
+        verify(mockRequestBodyBuilder, atLeastOnce()).bodyBuilderForAnyOrders(OrderInfoHandler.getWidthOfWindow(), OrderInfoHandler.getHeightOfWindow(), OrderInfoHandler.getNumberOfWindow(), OrderInfoHandler.getWidthThicknessAllowance(), OrderInfoHandler.getHeightThicknessAllowance(), OrderInfoHandler.getGlassType(), OrderInfoHandler.getUserName());
         assertEquals(orderInfoHandler.getRequestBody(), requestBody);
     }
 
@@ -73,7 +72,7 @@ public class OrderPlacementExecuterTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, orderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockRequestBodyBuilder, times(0)).bodyBuilderForAnyOrders(OrderInfoHandler.getWidthOfWindow(), OrderInfoHandler.getHeightOfWindow(), OrderInfoHandler.getNumberOfWindow(), OrderInfoHandler.getWidthThicknessAllowance(), OrderInfoHandler.getHeightThicknessAllowance(), OrderInfoHandler.getGlassType(), OrderInfoHandler.getUserName());
+        verify(mockRequestBodyBuilder, times(0)).bodyBuilderForAnyOrders(OrderInfoHandler.getWidthOfWindow(), OrderInfoHandler.getHeightOfWindow(), OrderInfoHandler.getNumberOfWindow(), OrderInfoHandler.getWidthThicknessAllowance(), OrderInfoHandler.getHeightThicknessAllowance(), OrderInfoHandler.getGlassType(), OrderInfoHandler.getUserName());
         assertEquals(orderInfoHandler.getRequestBody(), requestBody);
     }
 }

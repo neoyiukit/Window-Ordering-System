@@ -1,7 +1,6 @@
 package com.oocode;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.mockito.Mockito.*;
 
@@ -24,10 +23,10 @@ public class OrderRequestWrapperTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, mockOrderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getRequest();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponse();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseBody();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseMessage();
+        verify(mockOrderRequestsWrapper, times(1)).getRequest();
+        verify(mockOrderRequestsWrapper, times(1)).getResponse();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseBody();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseMessage();
     }
 
     @Test(expected = org.mockito.exceptions.verification.TooLittleActualInvocations.class)
@@ -44,10 +43,10 @@ public class OrderRequestWrapperTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, mockOrderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockOrderRequestsWrapper,times(2)).getRequest();
-        Mockito.verify(mockOrderRequestsWrapper,times(2)).getResponse();
-        Mockito.verify(mockOrderRequestsWrapper,times(2)).getResponseBody();
-        Mockito.verify(mockOrderRequestsWrapper,times(2)).getResponseMessage();
+        verify(mockOrderRequestsWrapper, times(2)).getRequest();
+        verify(mockOrderRequestsWrapper, times(2)).getResponse();
+        verify(mockOrderRequestsWrapper, times(2)).getResponseBody();
+        verify(mockOrderRequestsWrapper, times(2)).getResponseMessage();
     }
 
     @Test(expected = org.mockito.exceptions.verification.NeverWantedButInvoked.class)
@@ -64,10 +63,10 @@ public class OrderRequestWrapperTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, mockOrderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockOrderRequestsWrapper,times(0)).getRequest();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponse();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseBody();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseMessage();
+        verify(mockOrderRequestsWrapper, times(0)).getRequest();
+        verify(mockOrderRequestsWrapper, times(1)).getResponse();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseBody();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseMessage();
     }
 
     @Test(expected = org.mockito.exceptions.verification.NeverWantedButInvoked.class)
@@ -84,10 +83,10 @@ public class OrderRequestWrapperTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, mockOrderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getRequest();
-        Mockito.verify(mockOrderRequestsWrapper,times(0)).getResponse();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseBody();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseMessage();
+        verify(mockOrderRequestsWrapper, times(1)).getRequest();
+        verify(mockOrderRequestsWrapper, times(0)).getResponse();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseBody();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseMessage();
     }
 
     @Test(expected = org.mockito.exceptions.verification.NeverWantedButInvoked.class)
@@ -104,10 +103,10 @@ public class OrderRequestWrapperTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, mockOrderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getRequest();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponse();
-        Mockito.verify(mockOrderRequestsWrapper,times(0)).getResponseBody();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseMessage();
+        verify(mockOrderRequestsWrapper, times(1)).getRequest();
+        verify(mockOrderRequestsWrapper, times(1)).getResponse();
+        verify(mockOrderRequestsWrapper, times(0)).getResponseBody();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseMessage();
     }
 
     @Test(expected = org.mockito.exceptions.verification.NeverWantedButInvoked.class)
@@ -124,9 +123,9 @@ public class OrderRequestWrapperTest {
         OrderPlacementExecuter.orderRequestGenerator(orderInfoHandler, mockOrderRequestsWrapper);
 
         // THEN
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getRequest();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponse();
-        Mockito.verify(mockOrderRequestsWrapper,times(1)).getResponseBody();
-        Mockito.verify(mockOrderRequestsWrapper,times(0)).getResponseMessage();
+        verify(mockOrderRequestsWrapper, times(1)).getRequest();
+        verify(mockOrderRequestsWrapper, times(1)).getResponse();
+        verify(mockOrderRequestsWrapper, times(1)).getResponseBody();
+        verify(mockOrderRequestsWrapper, times(0)).getResponseMessage();
     }
 }
