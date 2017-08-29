@@ -59,6 +59,4 @@ public class ThicknessAllowanceHelperTest {
         verify(mockThicknessAllowanceHelper, times(1)).ReturnWidthThicknessAllowance("Victoria");
         verify(mockThicknessAllowanceHelper, times(1)).ReturnHeightThicknessAllowance("Victoria");
     }
-
-
 }
