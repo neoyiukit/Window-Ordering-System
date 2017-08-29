@@ -11,16 +11,14 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by neo.yiu on 25/08/2017.
  */
 public class OrderPlacementExecuterTest {
     @Test(expected = org.mockito.exceptions.misusing.InvalidUseOfMatchersException.class)
-    public void testingIfRequestBodyBuilderTalksToNormalEndpointAndGetCalledOnce() throws Exception{
+    public void testingIfRequestBodyBuilderTalksToNormalEndpointAndGetCalledAtLeastOnce() throws Exception{
 
         // GIVEN
         OrderInfoHandler orderInfoHandler = new OrderInfoHandler(5, 119, 1000, "Churchill", "test");
@@ -43,8 +41,7 @@ public class OrderPlacementExecuterTest {
         when(mockRequestBodyBuilder.bodyBuilderForAnyOrders(anyInt(), anyInt(), anyInt(), anyInt(), anyInt(), anyString(), anyString())).thenReturn(requestBody);
 
         // THEN
-        Mockito.verify(mockRequestBodyBuilder, times(1)).bodyBuilderForAnyOrders(OrderInfoHandler.getWidthOfWindow(), OrderInfoHandler.getHeightOfWindow(), OrderInfoHandler.getNumberOfWindow(), OrderInfoHandler.getWidthThicknessAllowance(), OrderInfoHandler.getHeightThicknessAllowance(), OrderInfoHandler.getGlassType(), OrderInfoHandler.getUserName());
-        Mockito.verifyNoMoreInteractions(mockRequestBodyBuilder);
+        Mockito.verify(mockRequestBodyBuilder, atLeastOnce()).bodyBuilderForAnyOrders(OrderInfoHandler.getWidthOfWindow(), OrderInfoHandler.getHeightOfWindow(), OrderInfoHandler.getNumberOfWindow(), OrderInfoHandler.getWidthThicknessAllowance(), OrderInfoHandler.getHeightThicknessAllowance(), OrderInfoHandler.getGlassType(), OrderInfoHandler.getUserName());
         assertEquals(orderInfoHandler.getRequestBody(), requestBody);
     }
 }
